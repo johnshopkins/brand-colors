@@ -170,7 +170,7 @@
     "hex": "A192B2"
   },
   {
-    "id": 17,
+    "id": 18,
     "name": "Tertiary Blue",
     "slug": "tertiary-blue",
     "type": "tertiary",
@@ -180,7 +180,7 @@
     "hex": "418FDE"
   },
   {
-    "id": 17,
+    "id": 19,
     "name": "Tertiary Seafoam",
     "slug": "tertiary-seafoam",
     "type": "tertiary",
@@ -190,7 +190,7 @@
     "hex": "86C8BC"
   },
   {
-    "id": 18,
+    "id": 20,
     "name": "Tertiary Dark Green",
     "slug": "tertiary-dark-green",
     "type": "tertiary",
@@ -200,7 +200,7 @@
     "hex": "286140"
   },
   {
-    "id": 19,
+    "id": 21,
     "name": "Tertiary Green",
     "slug": "tertiary-green",
     "type": "tertiary",
@@ -210,7 +210,7 @@
     "hex": "719949"
   },
   {
-    "id": 20,
+    "id": 22,
     "name": "Sable",
     "slug": "sable",
     "type": "grayscale",
@@ -220,7 +220,7 @@
     "hex": "31261D"
   },
   {
-    "id": 21,
+    "id": 23,
     "name": "White",
     "slug": "white",
     "type": "grayscale",
@@ -230,7 +230,7 @@
     "hex": "FFFFFF"
   },
   {
-    "id": 22,
+    "id": 24,
     "name": "Double Black",
     "slug": "double-black",
     "type": "grayscale",
