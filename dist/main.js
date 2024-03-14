@@ -1,8 +1,9 @@
-const s = [
+const m = [
   {
     id: 1,
     name: "Heritage Blue",
     slug: "heritage-blue",
+    type: "primary",
     pms: "288 C",
     cmyk: [
       100,
@@ -21,6 +22,7 @@ const s = [
     id: 2,
     name: "Spirit Blue",
     slug: "spirit-blue",
+    type: "primary",
     pms: "284 C",
     cmyk: [
       56,
@@ -39,6 +41,7 @@ const s = [
     id: 3,
     name: "Secondary Orange",
     slug: "secondary-orange",
+    type: "secondary",
     pms: "1375 C",
     cmyk: [
       0,
@@ -57,6 +60,7 @@ const s = [
     id: 4,
     name: "Secondary Green",
     slug: "secondary-green",
+    type: "secondary",
     pms: "3278 C",
     cmyk: [
       99,
@@ -75,6 +79,7 @@ const s = [
     id: 5,
     name: "Secondary Blue",
     slug: "secondary-blue",
+    type: "secondary",
     pms: "285 C",
     cmyk: [
       90,
@@ -93,6 +98,7 @@ const s = [
     id: 6,
     name: "Secondary Yellow",
     slug: "secondary-yellow",
+    type: "secondary",
     pms: "7406 C",
     cmyk: [
       0,
@@ -111,6 +117,7 @@ const s = [
     id: 7,
     name: "Tertiary Tan",
     slug: "tertiary-tan",
+    type: "tertiary",
     pms: "7407 C",
     cmyk: [
       6,
@@ -129,6 +136,7 @@ const s = [
     id: 8,
     name: "Tertiary Orange",
     slug: "tertiary-orange",
+    type: "tertiary",
     pms: "1505 C",
     cmyk: [
       0,
@@ -147,6 +155,7 @@ const s = [
     id: 9,
     name: "Tertiary Brown",
     slug: "tertiary-brown",
+    type: "tertiary",
     pms: "7586 C",
     cmyk: [
       0,
@@ -165,6 +174,7 @@ const s = [
     id: 10,
     name: "Tertiary Dark Brown",
     slug: "tertiary-dark-brown",
+    type: "tertiary",
     pms: "4625 C",
     cmyk: [
       30,
@@ -183,6 +193,7 @@ const s = [
     id: 11,
     name: "Tertiary Coral",
     slug: "tertiary-coral",
+    type: "tertiary",
     pms: "486 C",
     cmyk: [
       0,
@@ -201,6 +212,7 @@ const s = [
     id: 12,
     name: "Tertiary Dark Orange",
     slug: "tertiary-dark-orange",
+    type: "tertiary",
     pms: "173 C",
     cmyk: [
       0,
@@ -219,6 +231,7 @@ const s = [
     id: 13,
     name: "Tertiary Red",
     slug: "tertiary-red",
+    type: "tertiary",
     pms: "187 C",
     cmyk: [
       7,
@@ -237,6 +250,7 @@ const s = [
     id: 14,
     name: "Tertiary Maroon",
     slug: "tertiary-maroon",
+    type: "tertiary",
     pms: "188 C",
     cmyk: [
       16,
@@ -255,6 +269,7 @@ const s = [
     id: 15,
     name: "Tertiary Dark Purple",
     slug: "tertiary-dark-purple",
+    type: "tertiary",
     pms: "262 C",
     cmyk: [
       58,
@@ -273,6 +288,7 @@ const s = [
     id: 16,
     name: "Tertiary Purple",
     slug: "tertiary-purple",
+    type: "tertiary",
     pms: "7655 C",
     cmyk: [
       33,
@@ -291,6 +307,7 @@ const s = [
     id: 17,
     name: "Tertiary Lavender",
     slug: "tertiary-lavender",
+    type: "tertiary",
     pms: "666 C",
     cmyk: [
       36,
@@ -306,9 +323,10 @@ const s = [
     hex: "A192B2"
   },
   {
-    id: 17,
+    id: 18,
     name: "Tertiary Blue",
     slug: "tertiary-blue",
+    type: "tertiary",
     pms: "279 C",
     cmyk: [
       68,
@@ -324,9 +342,10 @@ const s = [
     hex: "418FDE"
   },
   {
-    id: 17,
+    id: 19,
     name: "Tertiary Seafoam",
     slug: "tertiary-seafoam",
+    type: "tertiary",
     pms: "564 C",
     cmyk: [
       43,
@@ -342,9 +361,10 @@ const s = [
     hex: "86C8BC"
   },
   {
-    id: 18,
+    id: 20,
     name: "Tertiary Dark Green",
     slug: "tertiary-dark-green",
+    type: "tertiary",
     pms: "7734 C",
     cmyk: [
       77,
@@ -360,9 +380,10 @@ const s = [
     hex: "286140"
   },
   {
-    id: 19,
+    id: 21,
     name: "Tertiary Green",
     slug: "tertiary-green",
+    type: "tertiary",
     pms: "7490 C",
     cmyk: [
       57,
@@ -376,16 +397,73 @@ const s = [
       73
     ],
     hex: "719949"
+  },
+  {
+    id: 22,
+    name: "Sable",
+    slug: "sable",
+    type: "grayscale",
+    pms: "Black 4 C",
+    cmyk: [
+      41,
+      57,
+      72,
+      90
+    ],
+    rgb: [
+      49,
+      38,
+      29
+    ],
+    hex: "31261D"
+  },
+  {
+    id: 23,
+    name: "White",
+    slug: "white",
+    type: "grayscale",
+    pms: null,
+    cmyk: [
+      0,
+      0,
+      0,
+      0
+    ],
+    rgb: [
+      255,
+      255,
+      255
+    ],
+    hex: "FFFFFF"
+  },
+  {
+    id: 24,
+    name: "Double Black",
+    slug: "double-black",
+    type: "grayscale",
+    pms: null,
+    cmyk: [
+      100,
+      100,
+      100,
+      100
+    ],
+    rgb: [
+      0,
+      0,
+      0
+    ],
+    hex: "000000"
   }
-], m = (r) => (r = r / 255, r <= 0.03928 ? r / 12.92 : ((r + 0.055) / 1.055) ** 2.4), n = (r) => {
-  const e = m(r[0]), a = m(r[1]), t = m(r[2]);
-  return 0.2126 * e + 0.7152 * a + 0.0722 * t;
-}, i = (r, e) => {
-  const a = n(r) + 0.05, t = n(e) + 0.05;
-  return parseFloat((a / t).toFixed(2));
+], y = (e) => (e = e / 255, e <= 0.03928 ? e / 12.92 : ((e + 0.055) / 1.055) ** 2.4), i = (e) => {
+  const r = y(e[0]), t = y(e[1]), a = y(e[2]);
+  return 0.2126 * r + 0.7152 * t + 0.0722 * a;
+}, s = (e, r) => {
+  const t = i(e) + 0.05, a = i(r) + 0.05;
+  return parseFloat((t / a).toFixed(2));
 };
 export {
-  s as colors,
-  i as contrast,
-  n as luminance
+  m as colors,
+  s as contrast,
+  i as luminance
 };
