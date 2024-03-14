@@ -1,0 +1,15 @@
+{
+  "name": "johnshopkins/color",
+  "autoload": {
+    "psr-4": {
+      "JohnsHopkins\\Color\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Jen Wachter",
+      "email": "jwachter@jhu.edu"
+    }
+  ],
+  "require": {}
+}
