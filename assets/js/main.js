@@ -1,4 +1,4 @@
-import colors from '../../config/colors.json';
-import { contrast, luminance } from './src/calculate.js';
+import * as calculate from './src/calculate.js';
+import * as colors from './src/colors.js';
 
-export { colors, contrast, luminance };
+export { calculate, colors };

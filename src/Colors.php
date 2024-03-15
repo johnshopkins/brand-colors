@@ -11,12 +11,19 @@ class Colors
   public static function get(): array
   {
     $json = file_get_contents(dirname(__DIR__) . '/config/colors.json');
-    return json_decode($json, true);
+    $colors = json_decode($json, true);
+
+    return array_map(fn ($data) => new Color($data), $colors);
   }
 
-  public static function getById(int $id): array
+  /**
+   * Get a brand colors by ID
+   * @param int $id Color ID
+   * @return array|null
+   */
+  public static function getByID(int $id): Color|null
   {
     $colors = self::get();
-    return $colors[$id - 1];
+    return $colors[$id - 1] ?? null;
   }
 }
