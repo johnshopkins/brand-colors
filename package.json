@@ -1,5 +1,5 @@
 {
-  "name": "@johnshopkins/color",
+  "name": "@johnshopkins/brand-colors",
   "version": "0.0.0",
   "description": "",
   "type": "module",
@@ -18,14 +18,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/johnshopkins/color.git"
+    "url": "git+https://github.com/johnshopkins/brand-colors.git"
   },
   "author": "Jen Wachter",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/johnshopkins/color/issues"
+    "url": "https://github.com/johnshopkins/brand-colors/issues"
   },
-  "homepage": "https://github.com/johnshopkins/color#readme",
+  "homepage": "https://github.com/johnshopkins/brand-colors#readme",
   "devDependencies": {
     "@babel/preset-env": "^7.24.0",
     "babel-jest": "^29.7.0",
