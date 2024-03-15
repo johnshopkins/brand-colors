@@ -20,13 +20,13 @@ const luminance = (rgb) => {
 /**
  * Calculate the contrast ratio between two colors
  * Uses the forumla provided by W3C: https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-procedure
- * @param light array Array of RGB values for the ligher color ex: [0, 45, 114]
- * @param dark array  Array of RGB values for the darker color ex: [0, 45, 114]
+ * @param lightRGB array Array of RGB values for the ligher color ex: [0, 45, 114]
+ * @param darkRGB array  Array of RGB values for the darker color ex: [0, 45, 114]
  * @returns {number}
  */
-const contrast = (light, dark) => {
-  const l1 = luminance(light) + 0.05;
-  const l2 = luminance(dark) + 0.05;
+const contrast = (lightRGB, darkRGB) => {
+  const l1 = luminance(lightRGB) + 0.05;
+  const l2 = luminance(darkRGB) + 0.05;
 
   return parseFloat((l1 / l2).toFixed(2));
 };
