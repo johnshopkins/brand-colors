@@ -96,6 +96,9 @@ class Grades
     $this->bounds[70][1] = .095;
     $this->bounds[80][1] = .047;
 
+    // get tertiary maroon within grade 70
+    $this->bounds[70][0] = .05;
+
     // adjust grade 60 to be less tight
     $this->bounds[10][0] = .750;
     $this->bounds[20][0] = .640;
