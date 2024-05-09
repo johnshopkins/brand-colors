@@ -14,7 +14,6 @@ class GradesTest extends TestCase
   public function testCalculate(): void
   {
     $grades = new Grades(false);
-    $grades->calculate();
 
     $expected = [
       0 => [1, 1],
@@ -38,7 +37,6 @@ class GradesTest extends TestCase
     $logger = new Logger(new CommandLineHandler());
 
     $grades = new Grades(false);
-    $grades->calculate();
 
     $tests = [
       "min->min" =>[0, 0],

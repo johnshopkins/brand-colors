@@ -41,6 +41,7 @@ class Grades
   public function __construct(protected bool $debug = false)
   {
     $this->logger = new Logger(new CommandLineHandler());
+    $this->calculate();
   }
 
   protected function log($level, $message)
@@ -50,7 +51,7 @@ class Grades
     }
   }
 
-  public function calculate()
+  protected function calculate()
   {
     // calculate and grades we can initally based on our contrast/grade rules
     for ($i = 0; $i < 2; $i++) {
@@ -112,7 +113,7 @@ class Grades
     $this->bounds[90][0] = .010;
   }
 
-  public function evaluate(int $currentGrade, string $direction = 'up', bool $debug = false)
+  protected function evaluate(int $currentGrade, string $direction = 'up', bool $debug = false)
   {
     if ($debug) $this->log('debug', "--------------------");
     if ($debug) $this->log('debug', "GRADE: $currentGrade -- $direction");
@@ -215,7 +216,7 @@ class Grades
    * @param float $c  Required contrast
    * @return float
    */
-  public function l1(float $l2, float $c = 4.5)
+  protected function l1(float $l2, float $c = 4.5)
   {
     return ($c * $l2) + (0.05 * $c) - 0.05;
   }
@@ -233,7 +234,7 @@ class Grades
    * @param float $c  Required contrast
    * @return float
    */
-  public function l2(float $l1, float $c = 4.5)
+  protected function l2(float $l1, float $c = 4.5)
   {
     return (($l1 + 0.05) / $c) - 0.05;
   }
