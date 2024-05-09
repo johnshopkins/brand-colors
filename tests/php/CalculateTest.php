@@ -16,6 +16,7 @@ class CalculateTest extends TestCase
 
   public function testContrast(): void
   {
+    $this->assertEquals(21, Calculate::contrast([255, 255, 255], [0, 0, 0]));
     $this->assertEquals(12.98, Calculate::contrast([255, 255, 255], [0, 45, 114]));
     $this->assertEquals(1.66, Calculate::contrast([255, 255, 255], [241, 196, 0]));
   }
