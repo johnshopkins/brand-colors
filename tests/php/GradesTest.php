@@ -113,6 +113,16 @@ class GradesTest extends TestCase
 
   }
 
+  public function testFindGradeOfRGB(): void
+  {
+    $grades = new Grades(self::DEBUG);
+
+    $this->assertEquals(100, $grades->findGradeOfRGB([0, 0, 0]));
+    $this->assertEquals(80, $grades->findGradeOfRGB([0, 45, 114]));
+    $this->assertEquals(45, $grades->findGradeOfRGB([0, 155, 119]));
+    $this->assertEquals(0, $grades->findGradeOfRGB([255, 255, 255]));
+  }
+
   protected function getContrastRatio($l1, $l2)
   {
     return round(($l1 + 0.05) / ($l2 + 0.05), 2);

@@ -45,6 +45,34 @@ class Grades
     $this->calculate();
   }
 
+  /**
+   * Find the grade of a given RGB color
+   * @param array $rgb [r, b, g] ex: [0, 45, 114]
+   * @return int|null
+   */
+  public function findGradeOfRGB(array $rgb): int|null
+  {
+    $luminance = round(Calculate::luminance($rgb), 3);
+
+    $prevMax = null;
+
+    foreach ($this->bounds as $grade => $bound) {
+
+      if ($luminance >= $bound[0] && $luminance <= $bound[1]) {
+        return $grade;
+      }
+
+      if ($prevMax && $luminance < $prevMax && $luminance > $bound[0]) {
+        // between this grade and previous grade
+        return $grade - 5;
+      }
+
+      $prevMax = $bound[1];
+    }
+
+    return null;
+  }
+
   protected function log($level, $message)
   {
     if ($this->debug) {
