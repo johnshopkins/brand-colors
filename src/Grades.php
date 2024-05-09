@@ -16,6 +16,7 @@ class Grades
    */
   public array $bounds = [
     0 => [1, 1], // white
+    5 => [null, null],
     10 => [null, null],
     20 => [null, null],
     30 => [null, null],
@@ -56,6 +57,10 @@ class Grades
     // calculate and grades we can initally based on our contrast/grade rules
     for ($i = 0; $i < 2; $i++) {
       foreach ($this->bounds as $grade => $bound) {
+
+        // we'll manually create grade 5
+        if ($grade === 5) continue;
+
         $this->evaluate($grade, 'up', true);
         $this->evaluate($grade, 'down', true);
       }
@@ -67,6 +72,9 @@ class Grades
     // * if missing the min in one row, make it the (0.001 more) max of the row BELOW
     // * if missing the max in one row, make it the (0.001 less) min of the row ABOVE
     foreach ($this->bounds as $grade => $bound) {
+
+      // we'll manually create grade 5
+      if ($grade === 5) continue;
 
       // make sure no maxes are the same as prev grade mins
       if (isset($this->bounds[$grade - 10]) && $bound[1] === $this->bounds[$grade - 10][0]) {
@@ -111,6 +119,11 @@ class Grades
 
     // adjust grade 90 max less close to black
     $this->bounds[90][0] = .010;
+
+    // // create level 5
+    $this->bounds[5][0] = 0.85;
+    $this->bounds[5][1] = 0.95;
+    $this->bounds[10][1] = 0.84;
   }
 
   protected function evaluate(int $currentGrade, string $direction = 'up', bool $debug = false)

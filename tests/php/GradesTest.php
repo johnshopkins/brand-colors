@@ -13,11 +13,12 @@ class GradesTest extends TestCase
 
   public function testCalculate(): void
   {
-    $grades = new Grades(false);
+    $grades = new Grades(self::DEBUG);
 
     $expected = [
       0 => [1, 1],
-      10 => [0.75, 0.95],
+      5 => [0.85, 0.95],
+      10 => [0.75, 0.84],
       20 => [0.64, 0.74],
       30 => [0.39, 0.624],
       40 => [0.288, 0.3],
@@ -36,7 +37,7 @@ class GradesTest extends TestCase
   {
     $logger = new Logger(new CommandLineHandler());
 
-    $grades = new Grades(false);
+    $grades = new Grades(self::DEBUG);
 
     $tests = [
       "min->min" =>[0, 0],
