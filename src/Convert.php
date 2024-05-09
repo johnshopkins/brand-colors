@@ -79,9 +79,8 @@ class Convert
     $saturation = $color[1] / 100;
     $lightness = $color[2] / 100;
 
-    $chroma = (1 - abs(2 * $lightness - 1)) * $saturation;
-
-    $x = $chroma * (1- abs(fmod(($hue / 60), 2) - 1));
+    $chroma = (1 - abs((2 * $lightness) - 1)) * $saturation;
+    $x = $chroma * (1 - abs(fmod(($hue / 60), 2) - 1));
 
     $r = 0;
     $g = 0;
@@ -111,9 +110,9 @@ class Convert
     $m = $lightness - ($chroma / 2);
 
     return [
-      (int) floor(($r + $m) * 255),
-      (int) floor(($g + $m) * 255),
-      (int) floor(($b + $m) * 255),
+      (int) round(($r + $m) * 255),
+      (int) round(($g + $m) * 255),
+      (int) round(($b + $m) * 255),
     ];
   }
 }

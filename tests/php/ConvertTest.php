@@ -14,8 +14,8 @@ class ConvertTest extends TestCase
 
   public function testHSL_RGB(): void
   {
-    $this->assertEquals([0, 45, 114], Convert::hsl_rgb([216, 100, 22.4]));
-    $this->assertEquals([114, 171, 229], Convert::hsl_rgb([210, 68.9, 67.3]));
+    $this->assertEquals([0, 46, 114], Convert::hsl_rgb([216, 100, 22.4]));
+    $this->assertEquals([114, 172, 229], Convert::hsl_rgb([210, 68.9, 67.3]));
     $this->assertEquals([241, 197, 0], Convert::hsl_rgb([49, 100, 47.3]));
   }
 }
