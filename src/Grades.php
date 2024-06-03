@@ -63,14 +63,63 @@ class Grades
       }
 
       if ($prevMax && $luminance < $prevMax && $luminance > $bound[0]) {
+
         // between this grade and previous grade
-        return $grade - 5;
+
+        $previousGrade = $grade - 10;
+
+        $this->log('debug', "this color's luminance ($luminance) is between $previousGrade and $grade\n");
+
+        // difference between luminance of between grades (ex 41, 42, 43, 44, etc...)
+        $betweenGradesDiff = ($prevMax - $bound[0]) / 9;
+
+        // will hold the found "between grade" like 43
+        $betweenGrade = null;
+
+        // initial (between grade 1) lower bound
+        $midGradeMax = $bound[0];
+
+        for ($i = 1; $i < 10; $i++) {
+
+          // grade $i upperbound
+          $newMidGradeMax = $midGradeMax + $betweenGradesDiff;
+
+          $this->log('debug', "$i: $newMidGradeMax");
+
+          if ($luminance <= $newMidGradeMax) {
+
+          $this->log('debug', "this color's luminance is between " . $grade + ($i - 1) . " and " . $grade + $i);
+
+            if ($i === 1) {
+              // can't go down to multiple of 10 grade, return this one (41, 51, etc...)
+              $betweenGrade = $previousGrade + $i;
+            } else {
+              // get the right in-between grade based on difference between lower and upper max
+              $diffFromLowerGrade = $luminance - $midGradeMax;
+              $diffFromHigherGrade = $newMidGradeMax - $luminance;
+              $betweenGrade = $diffFromLowerGrade <= $diffFromHigherGrade ? $previousGrade + ($i - 1) : $previousGrade + $i;
+            }
+          }
+
+          $midGradeMax = $newMidGradeMax;
+
+          if ($betweenGrade) {
+            break;
+          }
+        }
+
+        return $betweenGrade;
       }
 
       $prevMax = $bound[1];
     }
 
     return null;
+  }
+
+  public function shiftRGBtoGrade(array $rgb)
+  {
+
   }
 
   protected function log($level, $message)
@@ -154,11 +203,11 @@ class Grades
     $this->bounds[10][1] = 0.84;
   }
 
-  protected function evaluate(int $currentGrade, string $direction = 'up', bool $debug = false)
+  protected function evaluate(int $currentGrade, string $direction = 'up')
   {
-    if ($debug) $this->log('debug', "--------------------");
-    if ($debug) $this->log('debug', "GRADE: $currentGrade -- $direction");
-    if ($debug) $this->log('debug', "--------------------");
+    // $this->log('debug', "--------------------");
+    // $this->log('debug', "GRADE: $currentGrade -- $direction");
+    // $this->log('debug', "--------------------");
 
     $startLum = $direction === 'up' ? $this->bounds[$currentGrade][0] : $this->bounds[$currentGrade][1];
 
@@ -166,32 +215,32 @@ class Grades
 
     foreach ($this->contrasts as $gradeInt => $minContrast) {
 
-      if ($debug) $this->log('debug', "Contrast test: $minContrast");
+      // $this->log('debug', "Contrast test: $minContrast");
 
       $newGrade = $direction === 'up' ? $currentGrade + $gradeInt : $currentGrade - $gradeInt;
 
       if ($newGrade >= 100 || $newGrade <= 0) continue;
 
-      if ($debug) $this->log('debug', "New grade: $newGrade");
+      // $this->log('debug', "New grade: $newGrade");
 
       $newLum = $direction === 'up' ?
         $this->l2($startLum, $minContrast) :
         $this->l1($startLum, $minContrast);
 
-      if ($debug) $this->log('debug',  "New lum for grade $newGrade: $newLum");
+      // $this->log('debug',  "New lum for grade $newGrade: $newLum");
 
 
       $i = $direction === 'up' ? 1 : 0;
 
       $roundMethod = $direction === 'up' ? 'min' : 'max';
 
-      if (isset($this->contrastsChecked[$newGrade]) && !in_array($minContrast, $this->contrastsChecked[$newGrade][$i])) {
-        $this->contrastsChecked[$newGrade][$i][] = $minContrast;
-      }
-
-      if (!isset($this->bounds[$newGrade])) {
-        $this->bounds[$newGrade] = [null, null];
-      }
+      // if (isset($this->contrastsChecked[$newGrade]) && !in_array($minContrast, $this->contrastsChecked[$newGrade][$i])) {
+      //   $this->contrastsChecked[$newGrade][$i][] = $minContrast;
+      // }
+      //
+      // if (!isset($this->bounds[$newGrade])) {
+      //   $this->bounds[$newGrade] = [null, null];
+      // }
 
       $currentLum = $this->bounds[$newGrade][$i];
 
@@ -199,10 +248,10 @@ class Grades
         $newLum :
         $roundMethod($currentLum, $newLum);
 
-      if ($debug) $this->log('debug', "--------");
+      // $this->log('debug', "--------");
     }
 
-    if ($debug) $this->log('debug', "--------");
+    // $this->log('debug', "--------");
   }
 
   /**
@@ -223,7 +272,7 @@ class Grades
       // round min up
       if ($bounds[0] !== null) {
         if (preg_match($repeatingDecimal, $bounds[0])) {
-          // reoeating decimal; truncate
+          // repeating decimal; truncate
           $bounds[0] = ceil($bounds[0] * 1000) / 1000;
         } else {
           $bounds[0] = round($bounds[0], 3, PHP_ROUND_HALF_UP);
