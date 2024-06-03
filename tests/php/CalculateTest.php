@@ -1,8 +1,10 @@
 <?php
 
 use JohnsHopkins\Color\Calculate;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(Calculate::class)]
 class CalculateTest extends TestCase
 {
   public function testLuminance(): void

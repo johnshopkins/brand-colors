@@ -2,8 +2,11 @@
 
 use JohnsHopkins\Color\Color;
 use JohnsHopkins\Color\Colors;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(Color::class)]
+#[CoversClass(Colors::class)]
 class ColorTest extends TestCase
 {
   public function testGet(): void
