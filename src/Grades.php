@@ -48,9 +48,9 @@ class Grades
   /**
    * Find the grade of a given RGB color
    * @param array $rgb [r, b, g] ex: [0, 45, 114]
-   * @return int|null
+   * @return int
    */
-  public function findGradeOfRGB(array $rgb): int|null
+  public function findGradeOfRGB(array $rgb): int
   {
     $luminance = round(Calculate::luminance($rgb), 3);
 
@@ -113,8 +113,6 @@ class Grades
 
       $prevMax = $bound[1];
     }
-
-    return null;
   }
 
   public function shiftRGBtoGrade(array $rgb)

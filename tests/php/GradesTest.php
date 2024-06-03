@@ -127,6 +127,7 @@ class GradesTest extends TestCase
     $this->assertEquals(45, $grades->findGradeOfRGB([0, 155, 119]));
     $this->assertEquals(33, $grades->findGradeOfRGB([203, 160, 82]));
     $this->assertEquals(57, $grades->findGradeOfRGB([0, 114, 206]));
+    $this->assertEquals(31, $grades->findGradeOfRGB([255, 105, 0]));
     $this->assertEquals(0, $grades->findGradeOfRGB([255, 255, 255]));
   }
 
