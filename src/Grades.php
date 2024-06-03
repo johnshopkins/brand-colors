@@ -176,7 +176,7 @@ class Grades
     // manual adjustments
 
     // get spirit blue (0.39) within grade 30
-    $this->bounds[30][0] = .390;
+    $this->bounds[30][0] = .387;
     $this->bounds[70][1] = .095;
     $this->bounds[80][1] = .047;
 
