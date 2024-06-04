@@ -122,8 +122,28 @@ class Grades
     }
   }
 
-  public function shiftRGBtoGrade(array $rgb)
+  public function shiftRGBtoGrade(array $rgb, bool $opposite = false)
   {
+    $currentGrade = $this->findGradeOfRGB($rgb);
+
+    $roundToGrade = (round($currentGrade / 10) * 10);
+
+    if ($opposite) {
+      if ($currentGrade > $roundToGrade) {
+        $roundToGrade+= 10;
+      } else {
+        $roundToGrade-= 10;
+      }
+    }
+
+    $roundTo = $this->bounds[$roundToGrade];
+
+    return [
+      'grade' => $roundToGrade,
+      'direction' => $currentGrade > $roundToGrade ? 'down' : 'up',
+      'colors' => $this->getGradeColors($rgb, ...$roundTo),
+    ];
+  }
 
   /**
    * Create a color palette for a given RGB color value.
