@@ -310,14 +310,6 @@ class Grades
 
       $roundMethod = $direction === 'up' ? 'min' : 'max';
 
-      // if (isset($this->contrastsChecked[$newGrade]) && !in_array($minContrast, $this->contrastsChecked[$newGrade][$i])) {
-      //   $this->contrastsChecked[$newGrade][$i][] = $minContrast;
-      // }
-      //
-      // if (!isset($this->bounds[$newGrade])) {
-      //   $this->bounds[$newGrade] = [null, null];
-      // }
-
       $currentLum = $this->bounds[$newGrade][$i];
 
       $this->bounds[$newGrade][$i] = $currentLum === null ?
