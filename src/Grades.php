@@ -68,40 +68,47 @@ class Grades
 
         $previousGrade = $grade - 10;
 
-        $this->log('debug', "this color's luminance ($luminance) is between $previousGrade and $grade\n");
+        $this->log('debug', "this color's luminance ($luminance) is between $previousGrade and $grade");
 
-        // difference between luminance of between grades (ex 41, 42, 43, 44, etc...)
+        // difference between luminance 1-9 grades in-between grades
+        // ex: difference between max luminance of grade 50 and minimum luminamce of grade 60 to get grades 51, 52, 53, etc...
         $betweenGradesDiff = ($prevMax - $bound[0]) / 10;
 
-        // will hold the found "between grade" like 43
+        // will hold the found "between grade" of this color. ex: 43
         $betweenGrade = null;
 
-        // initial (between grade 1) lower bound
-        $midGradeMax = $bound[0];
+        // initial lower bound (between grade 1)
+        $midGradeMin = $bound[0];
 
+        $this->log('debug', "Initial lower bound: $midGradeMin");
+        $this->log('debug', "Grade diff: $betweenGradesDiff");
+
+        for ($i = 1; $i <= 10; $i++) {
 
           // grade $i upperbound
-          $newMidGradeMax = $midGradeMax + $betweenGradesDiff;
+          $midGradeMax = $midGradeMin + $betweenGradesDiff;
 
-          $this->log('debug', "$i: $newMidGradeMax");
+          $this->log('debug', ($previousGrade + $i) . " upper bound: $midGradeMax");
 
-          if ($luminance <= $newMidGradeMax) {
+          if ($luminance <= $midGradeMax) {
 
-          $this->log('debug', "this color's luminance is between " . $grade + ($i - 1) . " and " . $grade + $i);
+            $this->log('debug', "this color's luminance is between " . $grade + ($i - 1) . " and " . $grade + $i);
 
-            if ($i === 1) {
-              // can't go down to multiple of 10 grade, return this one (41, 51, etc...)
+            // figure out if it's closer to the lower or upper luminance bound
+            // this will determine if the color is say, 43 or 44
+            if ($i === 1 || $i === 9) {
+              // can't go to multiple of 10 grade, return this one (41, 49, etc...)
               $betweenGrade = $previousGrade + $i;
             } else {
               // get the right in-between grade based on difference between lower and upper max
-              $diffFromLowerGrade = $luminance - $midGradeMax;
-              $diffFromHigherGrade = $newMidGradeMax - $luminance;
+              $diffFromLowerGrade = $luminance - $midGradeMin;
+              $diffFromHigherGrade = $midGradeMax - $luminance;
               $betweenGrade = $diffFromLowerGrade <= $diffFromHigherGrade ? $previousGrade + ($i - 1) : $previousGrade + $i;
             }
           }
 
-          $midGradeMax = $newMidGradeMax;
-        for ($i = 1; $i <= 10; $i++) {
+          // this midgrade maximum is now next midgrade's minimum
+          $midGradeMin = $midGradeMax;
 
           if ($betweenGrade) {
             break;
