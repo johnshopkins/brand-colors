@@ -42,7 +42,7 @@ $colors = array_filter(array_map(function ($color) use ($emptyPalette, $gradeNum
       continue;
     }
 
-    $palette[$gradeToFind] = getGradeColors($currentRGB, ...$bounds);
+    $palette[$gradeToFind] = $grades->getGradeColors($currentRGB, ...$bounds);
 
     // set new RGB as the min of the previous grade
     $currentRGB = $palette[$gradeToFind]['min'];
@@ -59,7 +59,7 @@ $colors = array_filter(array_map(function ($color) use ($emptyPalette, $gradeNum
       continue;
     }
 
-    $palette[$gradeToFind] = getGradeColors($currentRGB, ...$bounds);
+    $palette[$gradeToFind] = $grades->getGradeColors($currentRGB, ...$bounds);
 
     // set new RGB as the max of the previous grade
     $currentRGB = $palette[$gradeToFind]['max'];
