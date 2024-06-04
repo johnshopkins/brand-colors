@@ -71,7 +71,7 @@ class Grades
         $this->log('debug', "this color's luminance ($luminance) is between $previousGrade and $grade\n");
 
         // difference between luminance of between grades (ex 41, 42, 43, 44, etc...)
-        $betweenGradesDiff = ($prevMax - $bound[0]) / 9;
+        $betweenGradesDiff = ($prevMax - $bound[0]) / 10;
 
         // will hold the found "between grade" like 43
         $betweenGrade = null;
@@ -79,7 +79,6 @@ class Grades
         // initial (between grade 1) lower bound
         $midGradeMax = $bound[0];
 
-        for ($i = 1; $i < 10; $i++) {
 
           // grade $i upperbound
           $newMidGradeMax = $midGradeMax + $betweenGradesDiff;
@@ -102,6 +101,7 @@ class Grades
           }
 
           $midGradeMax = $newMidGradeMax;
+        for ($i = 1; $i <= 10; $i++) {
 
           if ($betweenGrade) {
             break;
