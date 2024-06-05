@@ -1,7 +1,11 @@
 <?php
 
+/**
+ * Adds luminance and contrast against white,
+ * sable, and doubleblack to config/colors.json
+ */
+
 use JohnsHopkins\Color\Calculate;
-use JohnsHopkins\Color\Colors;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
