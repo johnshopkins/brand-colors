@@ -6,6 +6,12 @@ use cli\Table;
 use Logger\Handler\CommandLineHandler;
 use Logger\Logger;
 
+/**
+ * Tool used to
+ * - generate our color grades
+ * - determine the grade in which any given RGB value fits
+ * - shift a given RGB color to fit into a grade
+ */
 class Grades
 {
   protected Logger $logger;
