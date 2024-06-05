@@ -122,13 +122,17 @@ class Grades
     }
   }
 
-  public function shiftRGBtoGrade(array $rgb, bool $opposite = false)
+  public function shiftRGBtoGrade(array $rgb, int $grade = null, bool $opposite = false)
   {
     $currentGrade = $this->findGradeOfRGB($rgb);
 
-    $roundToGrade = (round($currentGrade / 10) * 10);
+    if ($grade) {
+      $roundToGrade = $grade;
+    } else {
+      $roundToGrade = (round($currentGrade / 10) * 10);
+    }
 
-    if ($opposite) {
+    if ($grade === null && $opposite) {
       if ($currentGrade > $roundToGrade) {
         $roundToGrade+= 10;
       } else {
