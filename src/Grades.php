@@ -148,10 +148,12 @@ class Grades
 
     $roundTo = $this->bounds[$roundToGrade];
 
+    $colors = $this->getGradeColors($rgb, ...$roundTo);
+    $direction = $currentGrade > $roundToGrade ? 'down' : 'up';
+
     return [
       'grade' => $roundToGrade,
-      'direction' => $currentGrade > $roundToGrade ? 'down' : 'up',
-      'colors' => $this->getGradeColors($rgb, ...$roundTo),
+      'color' => $direction === 'up' ? $colors['max'] : $colors['min'],
     ];
   }
 

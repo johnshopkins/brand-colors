@@ -48,8 +48,7 @@ $rows = array_map(function ($c) use ($grades) {
 
   $new = $grades->shiftRGBtoGrade($color['rgb'], $grade, $opposite);
 
-  $newRGB = $new['direction'] === 'up' ? $new['colors']['max'] : $new['colors']['min'];
-  $rgb = 'rgb(' . implode(",", $newRGB) . ')';
+  $rgb = 'rgb(' . implode(",", $new['color']) . ')';
   echo "<td style='background-color:$rgb; color: #fff;'>{$new['grade']}</td>";
 
   echo "</tr>";
