@@ -4,6 +4,16 @@ namespace JohnsHopkins\Color;
 
 class Convert
 {
+  public static function rgb_hex(array $rgb)
+  {
+    return sprintf("%02x%02x%02x", ...$rgb);
+  }
+
+  public static function hex_rgb(string $hex): array
+  {
+    return sscanf($hex, "%02x%02x%02x");
+  }
+
   /**
    * Conver RGB to HSL
    * Used this formula: https://en.wikipedia.org/wiki/HSL_and_HSV#Formal_derivation

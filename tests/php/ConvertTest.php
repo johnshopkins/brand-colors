@@ -7,6 +7,28 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(Convert::class)]
 class ConvertTest extends TestCase
 {
+  public function setUp(): void
+  {
+    parent::setUp();
+
+    $json = file_get_contents(dirname(__DIR__, 2) . '/config/colors.json');
+    $this->colors = json_decode($json, true);
+  }
+
+  public function testRGB_HEX(): void
+  {
+    foreach ($this->colors as $color) {
+      $this->assertEqualsIgnoringCase($color['hex'], Convert::rgb_hex($color['rgb']));
+    }
+  }
+
+  public function testHEX_RGB(): void
+  {
+    foreach ($this->colors as $color) {
+      $this->assertEqualsIgnoringCase($color['rgb'], Convert::hex_rgb($color['hex']));
+    }
+  }
+
   public function testRGB_HSL(): void
   {
     $this->assertEquals([216, 100, 22.4], Convert::rgb_hsl([0, 45, 114]));
