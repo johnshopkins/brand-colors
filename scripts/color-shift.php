@@ -16,14 +16,15 @@ $grades = new Grades(false);
 // colors that fall outside of a range
 $colors = [
   [$colors[3]],
-  [$colors[4], true],
+  [$colors[4], null, true],
   [$colors[6]],
-  [$colors[7], true],
-  [$colors[8], true],
-  [$colors[15], true],
-  [$colors[16], true],
-  [$colors[17], true],
-  [$colors[20], true],
+  [$colors[7], null, true],
+  [$colors[8], null, true],
+  [$colors[13], 80], // maroon
+  [$colors[15], null, true],
+  [$colors[16], null, true],
+  [$colors[17], null, true],
+  [$colors[20], null, true],
 ];
 
 echo "<table style='table-layout: fixed;' cellpadding='10' cellspacing='0' border='1'>";
