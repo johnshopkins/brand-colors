@@ -22,13 +22,13 @@
     "type": "primary",
     "pms": "284 C",
     "cmyk": [56, 18, 0 , 0],
-    "rgb": [114, 172, 229],
+    "rgb": [104, 172, 229],
     "hex": "68ACE5",
-    "luminance": 38.74,
+    "luminance": 38.11,
     "contrast": {
-      "double-black": 8.75,
-      "sable": 6.14,
-      "white": 2.4
+      "double-black": 8.62,
+      "sable": 6.05,
+      "white": 2.44
     }
   },
   {
