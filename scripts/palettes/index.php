@@ -24,49 +24,70 @@ $colors = getCompliantColors();
 
 $palettes = [
   'grayscale' => [
-    // 50 => [120, 116, 112], // get the colors to be more gray (swatch taken from eric's scale and modified to be within range 50)
-    90 => $colors[21]['rgb'],
+    'colors' => [
+      // 50 => [120, 116, 112], // get the colors to be more gray (swatch taken from eric's scale and modified to be within range 50)
+      90 => $colors[21]['rgb'],
+    ],
+    'settings' => [
+      'grayscale' => true,
+    ]
   ],
   'red' => [
-    30 => $colors[10]['rgb'],
-    70 => $colors[12]['rgb'],
-    80 => $colors[13]['rgb'],
+    'colors' => [
+      30 => $colors[10]['rgb'],
+      70 => $colors[12]['rgb'],
+      80 => $colors[13]['rgb'],
+    ]
   ],
   'orange' => [
-    30 => $colors[2]['rgb'],
-    40 => $colors[7]['rgb'],
-    50 => $colors[11]['rgb'],
+    'colors' => [
+      30 => $colors[2]['rgb'],
+      40 => $colors[7]['rgb'],
+      50 => $colors[11]['rgb'],
+    ]
   ],
   'gold' => [
-    30 => $colors[5]['rgb'],
-    60 => $colors[8]['rgb'],
+    'colors' => [
+      30 => $colors[5]['rgb'],
+      // 60 => $colors[8]['rgb'],
+    ]
   ],
   'warm green' => [
-    // 30 => $colors[18]['rgb'],
-    40 => $colors[20]['rgb'],
-    // 50 => $colors[3]['rgb'],
-    70 => $colors[19]['rgb'],
+    'colors' => [
+      40 => $colors[20]['rgb'],
+      70 => $colors[19]['rgb'],
+    ]
   ],
   'cool green' => [
-    30 => $colors[18]['rgb'],
-    50 => $colors[3]['rgb'],
+    'colors' => [
+      30 => $colors[18]['rgb'],
+      50 => $colors[3]['rgb'],
+    ]
   ],
   'blue' => [
-    30 => $colors[1]['rgb'],
-    40 => $colors[17]['rgb'],
-    50 =>  $colors[4]['rgb'],
-    80 => $colors[0]['rgb'],
+    'colors' => [
+      30 => $colors[1]['rgb'],
+      40 => $colors[17]['rgb'],
+      50 =>  $colors[4]['rgb'],
+      80 => $colors[0]['rgb'],
+    ]
   ],
   'cool purple' => [
-    40 => $colors[16]['rgb'],
+    'colors' => [
+      40 => $colors[16]['rgb'],
+    ]
   ],
   'warm purple' => [
-    50 => $colors[15]['rgb'],
-    80 => $colors[14]['rgb'],
+    'colors' => [
+      50 => $colors[15]['rgb'],
+      80 => $colors[14]['rgb'],
+    ]
   ],
   'neutral' => [
-    30 => $colors[6]['rgb'],
-    80 => $colors[9]['rgb'],
+    'colors' => [
+      30 => $colors[6]['rgb'],
+      80 => $colors[9]['rgb'],
+    ]
   ]
 ];
 
@@ -74,124 +95,69 @@ $palettes = array_map(static function ($knownPalette) {
 
   $grades = new Grades();
 
-  $compiledPalette = getStarterPalette();
+  $compiledPalette = getStarterPalette($knownPalette['colors']);
 
-  // going from first color down to white and last color down to black,
-  // do not affect hue or satration -- only hue
-
-  // colors already filled in the palette
-  $filled = array_keys(array_filter($knownPalette, 'is_array'));
-
-  // go from white to first found color
-  // create grades inbetween white and first found color
-  $first = array_shift($filled);
-
-  // index of first color grade (to be used with $grades)
-  $index = $compiledPalette[$first];
-
-  // add first color to compiled palette
-  $compiledPalette[$first] = $knownPalette[$first];
-
-  // go down grades to white
-  $down = array_reverse(array_slice($grades->bounds, 0, $index + 1, true), true);
-  $currentRGB = $knownPalette[$first]; // reset RGB starting point
-
-  foreach ($down as $gradeToFind => $bounds) {
-
-    if ($gradeToFind === 0) {
-      // white
-      continue;
-    }
-
-    // this is only affecting lightness
-    $colors = $grades->getGradeColors($currentRGB, ...$bounds);
-    $compiledPalette[$gradeToFind] = $colors['mid'];
-
-    // set new RGB as the min of the previous grade
-    $currentRGB = $colors['min'];
-  }
-
-  // go from last found color to black
-  // create grades inbetween last found color and black
-  if (!empty($filled)) {
-    $last = array_pop($filled);
-
-    // index of last color grade (to be used with $grades)
-    $index = $compiledPalette[$last];
-
-    // go up grades to black
-    $up = array_slice($grades->bounds, $index + 1, null, true);
-    $currentRGB = $knownPalette[$last];
-    foreach ($up as $gradeToFind => $bounds) {
-
-      if ($gradeToFind === 100 || is_array($compiledPalette[$gradeToFind])) {
-        // black or brand color
-        continue;
-      }
-
-      $colors = $grades->getGradeColors($currentRGB, ...$bounds);
-      $compiledPalette[$gradeToFind] = $colors['mid'];
-
-      // set new RGB as the max of the previous grade
-      $currentRGB = $colors['max'];
-    }
-  }
-
-  // fill in the gaps
-
+  // find missing grades
   $gaps = array_keys(array_filter($compiledPalette, 'is_int'));
 
-  // first, do known colors
-  foreach ($gaps as $missingGrade) {
-    if (isset($knownPalette[$missingGrade])) {
-      // this color is preset
-      $compiledPalette[$missingGrade] = $knownPalette[$missingGrade];
-    }
-  }
-
-  // find still missing gaps
-  $gaps = array_keys(array_filter($compiledPalette, 'is_int'));
-
-  // group grades together that will use the same bookend colors
+  // group missing grades together that will use the same bookend colors
   $gapGroups = groupSequential($gaps);
 
   foreach($gapGroups as $group) {
 
-    $startGrade = $group[0] === 5 ? 0 : $group[0] - 10;
-    $endGrade = $group[count($group) - 1] + 10;
+    $startGrade = $group[0] === 5 ? 0 : $group[0] - 10; // starting bookend
+    $endGrade = $group[count($group) - 1] + 10;   // ending bookend
 
+    // convert to HSL
     $startColor = Convert::rgb_hsl($compiledPalette[$startGrade]);
     $endColor = Convert::rgb_hsl($compiledPalette[$endGrade]);
 
-    $gapsToFill = count($group);
+    if (!isset($knownPalette['settings']['grayscale']) || $knownPalette['settings']['grayscale'] === false) {
+      // do not factor the in hue and saturation of the starting or ending color (used for non-grayscale palettes)
+      if ($startColor == [0, 0, 100] || $startColor == [0, 0, 0]) {
+        // white or black - use the hue and saturation of the end color
+        $startColor[0] = $endColor[0];
+        $startColor[1] = $endColor[1];
+      } else if ($endColor == [0, 0, 100] || $endColor == [0, 0, 0]) {
+        // white or black - use the hue and saturation of the start color
+        $endColor[0] = $startColor[0];
+        $endColor[1] = $startColor[1];
+      }
+    }
 
-    $diffIntervals = [
-      (min(abs($startColor[0] - $endColor[0]), 360 - abs($startColor[0] - $endColor[0]))) / ($gapsToFill + 1),
-      ($startColor[1] - $endColor[1]) / ($gapsToFill + 1),
-      ($startColor[2] - $endColor[2]) / ($gapsToFill + 1),
-    ];
+    // get hude and saturation intervals for missing grades
+    // lightness does not factor in here because we calculate lightness based on required luminance ranges
+    $gapsToFill = count($group);
+    $hueInterval = (min(abs($startColor[0] - $endColor[0]), 360 - abs($startColor[0] - $endColor[0]))) / ($gapsToFill + 1);
+    $saturationInteraval = ($startColor[1] - $endColor[1]) / ($gapsToFill + 1);
 
     // direction we're moving around the color wheel
     $clockwise = ((($startColor[0] - $endColor[0]) + 360) % 360) < 180;
 
-    foreach ($group as $grade) {
+    foreach ($group as $i => $grade) {
 
-      $hue = $clockwise ? $startColor[0] - $diffIntervals[0] : $startColor[0] + $diffIntervals[0];
+      // adjust hue using the interval
+      $hue = $clockwise ? $startColor[0] - $hueInterval : $startColor[0] + $hueInterval;
       if ($hue < 0) {
+        // adjust negative angles
         $hue = 360 + $hue;
       }
 
-      $startColor = [
-        $hue,
-        $startColor[1] - $diffIntervals[1],
-        $startColor[2] - $diffIntervals[2],
-      ];
+      // adjust saturation using the interval
+      $saturation = $startColor[1] - $saturationInteraval;
 
-      $compiledPalette[$grade] = Convert::hsl_rgb($startColor);
+      // adjust lightness to fit into this grade
+      $lightness = decreaseLightness([$hue, $saturation, $startColor[2]], ...$grades->bounds[$grade]);
+
+      // put it alltogether
+      $newColor = [$hue, $saturation, $lightness];
+
+      $compiledPalette[$grade] = Convert::hsl_rgb($newColor);
+
+      $startColor = $newColor;
     }
-
   }
-
+  
   // remove black and white
   unset($compiledPalette[0], $compiledPalette[100]);
 
