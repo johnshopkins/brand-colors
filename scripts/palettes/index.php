@@ -25,7 +25,7 @@ $colors = getCompliantColors();
 $palettes = [
   'grayscale' => [
     'colors' => [
-      // 50 => [120, 116, 112], // get the colors to be more gray (swatch taken from eric's scale and modified to be within range 50)
+      50 => [120, 116, 112], // get the colors to be more gray (swatch taken from eric's scale and modified to be within range 50)
       90 => $colors[21]['rgb'],
     ],
     'settings' => [
@@ -49,7 +49,7 @@ $palettes = [
   'gold' => [
     'colors' => [
       30 => $colors[5]['rgb'],
-      // 60 => $colors[8]['rgb'],
+      60 => $colors[8]['rgb'],
     ]
   ],
   'warm green' => [
@@ -157,7 +157,7 @@ $palettes = array_map(static function ($knownPalette) {
       $startColor = $newColor;
     }
   }
-  
+
   // remove black and white
   unset($compiledPalette[0], $compiledPalette[100]);
 
