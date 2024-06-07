@@ -560,32 +560,6 @@ const n = (e) => (e = e / 255, e <= 0.03928 ? e / 12.92 : ((e + 0.055) / 1.055) 
   },
   {
     id: 22,
-    name: "Sable",
-    slug: "sable",
-    type: "grayscale",
-    pms: "Black 4 C",
-    cmyk: [
-      41,
-      57,
-      72,
-      90
-    ],
-    rgb: [
-      49,
-      38,
-      29
-    ],
-    hex: "31261d",
-    grade: 90,
-    luminance: 2.13,
-    contrast: {
-      "double-black": 1.43,
-      sable: 1,
-      white: 14.73
-    }
-  },
-  {
-    id: 23,
     name: "White",
     slug: "white",
     type: "grayscale",
@@ -608,6 +582,32 @@ const n = (e) => (e = e / 255, e <= 0.03928 ? e / 12.92 : ((e + 0.055) / 1.055) 
       "double-black": 21,
       sable: 14.73,
       white: 1
+    }
+  },
+  {
+    id: 23,
+    name: "Sable",
+    slug: "sable",
+    type: "grayscale",
+    pms: "Black 4 C",
+    cmyk: [
+      41,
+      57,
+      72,
+      90
+    ],
+    rgb: [
+      49,
+      38,
+      29
+    ],
+    hex: "31261d",
+    grade: 90,
+    luminance: 2.13,
+    contrast: {
+      "double-black": 1.43,
+      sable: 1,
+      white: 14.73
     }
   },
   {
