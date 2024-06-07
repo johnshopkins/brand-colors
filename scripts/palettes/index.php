@@ -106,6 +106,15 @@ $palettes = array_map(fn ($knownPalette) => (new Palette())->create($knownPalett
 
 if ($mode === 'json') {
 
+  $palettes = array_map(function ($colors) {
+    return array_map(function ($color) {
+      if (is_a($color, \JohnsHopkins\Color\Color::class)) {
+        return ['rgb' => $color->rgb, 'hex' => $color->hex, 'brand' => true];
+      }
+      return $color;
+    }, $colors);
+  }, $palettes);
+
   $json = json_encode($palettes);
   file_put_contents(dirname(__DIR__, 2) . '/config/palettes.json', $json);
   exec('npm run format-json');
