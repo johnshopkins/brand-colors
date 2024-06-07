@@ -83,12 +83,26 @@ $palettes = [
       30 => $colors[6], // 7407 (tertiary tan)
       80 => $colors[9], // 4625 (tertiary dark brown)
     ]
-  ]
+  ],
+
+  // 'green' => [
+  //   'colors' => [
+  //     30 => $colors[18], // 564 (tertiary seafoam)
+  //     40 => $colors[20], // 7490 (tertiary green)
+  //     50 => $colors[3],  // 3278 (secondary green)
+  //     70 => $colors[19], // 7734 (tertiary dark green)
+  //   ]
+  // ],
+  // 'purple' => [
+  //   'colors' => [
+  //     40 => $colors[16], // 666 (tertiary lavender)
+  //     50 => $colors[15], // 7655 (tertiary purple)
+  //     80 => $colors[14], // 262 (tertiary dark purple)
+  //   ]
+  // ],
 ];
 
 $palettes = array_map(fn ($knownPalette) => (new Palette())->create($knownPalette), $palettes);
-
-// print_r($palettes); die();
 
 if ($mode === 'json') {
 
