@@ -152,7 +152,7 @@ class Grades
 
     return [
       'grade' => $roundToGrade,
-      'color' => $direction === 'up' ? $colors['max'] : $colors['min'],
+      'rgb' => $direction === 'up' ? $colors['max'] : $colors['min'],
     ];
   }
 

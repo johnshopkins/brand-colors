@@ -101,8 +101,8 @@ function getCompliantColors(): array
 
     $new = $grades->shiftRGBtoGrade($color['rgb'], ...$args);
 
-    $color['rgb'] = $new['color'];
-    $color['hex'] = Convert::rgb_hex($new['color']);
+    $color['rgb'] = $new['rgb'];
+    $color['hex'] = Convert::rgb_hex($new['rgb']);
 
     return $color;
 
