@@ -10,7 +10,7 @@ use JohnsHopkins\Color\Grades;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-$json = file_get_contents(dirname(__DIR__) . '/config/colors.json');
+$json = file_get_contents(dirname(__DIR__) . '/config/brand-colors.json');
 $colors = json_decode($json, true);
 
 $grades = new Grades(true);
