@@ -19,9 +19,6 @@ $mode = 'table';
 // // save shifted colors to config/colors.json
 // $mode = 'json';
 
-$saveJSON = false;
-$showTable = true;
-
 $json = file_get_contents(dirname(__DIR__) . '/config/brand-colors.json');
 $colors = json_decode($json, true);
 
