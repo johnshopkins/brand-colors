@@ -27,8 +27,8 @@ class Palette
       $endGrade = $group[count($group) - 1] + 10;   // ending bookend
 
       // convert to HSL
-      $startColor = Convert::rgb_hsl($compiledPalette[$startGrade]);
-      $endColor = Convert::rgb_hsl($compiledPalette[$endGrade]);
+      $startColor = Convert::rgb_hsl($compiledPalette[$startGrade]->rgb);
+      $endColor = Convert::rgb_hsl($compiledPalette[$endGrade]->rgb);
 
       if (!isset($knownPalette['settings']['grayscale']) || $knownPalette['settings']['grayscale'] === false) {
         // do not factor the in hue and saturation of the starting or ending color (used for non-grayscale palettes)
@@ -70,7 +70,11 @@ class Palette
         // put it alltogether
         $newColor = [$hue, $saturation, $lightness];
 
-        $compiledPalette[$grade] = Convert::hsl_rgb($newColor);
+        $rgb = Convert::hsl_rgb($newColor);
+        $compiledPalette[$grade] = [
+          'rgb' => $rgb,
+          'hex' => Convert::rgb_hex($rgb)
+        ];
 
         $startColor = $newColor;
       }
@@ -136,8 +140,8 @@ class Palette
     }
 
     // add in black and white
-    $starter[0] = [255, 255, 255];
-    $starter[100] = [0, 0, 0];
+    $starter[0] = (object) ['rgb' => [255, 255, 255]];
+    $starter[100] = (object) ['rgb' => [0, 0, 0]];
 
     return $starter;
   }
