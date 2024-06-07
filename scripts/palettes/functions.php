@@ -65,51 +65,6 @@ function getStarterPalette(array $knownPalette): array
 }
 
 /**
- * Get all brand colors, shifting colors that are not
- * in one of our luminance ranges into a luminance range.
- * @return array
- */
-function getCompliantColors(): array
-{
-  $json = file_get_contents(dirname(__DIR__, 2) . '/config/colors.json');
-  $colors = json_decode($json, true);
-
-  // colors that need to shift
-  // id => [$grade, $opposite]
-  $shift = [
-    4 => [],
-    5 => [null, true],
-    7 => [],
-    8 => [null, true],
-    9 => [null, true],
-    14 => [80], // maroon (shift from 70 t0 80 so we have two grades of red)
-    16 => [null, true],
-    17 => [null, true],
-    18 => [null, true],
-    21 => [null, true],
-  ];
-
-  $grades = new Grades();
-
-  return array_map(function ($color) use ($grades, $shift) {
-
-    if (!isset($shift[$color['id']])) {
-      return $color;
-    }
-
-    $args = $shift[$color['id']];
-
-    $new = $grades->shiftRGBtoGrade($color['rgb'], ...$args);
-
-    $color['rgb'] = $new['rgb'];
-    $color['hex'] = Convert::rgb_hex($new['rgb']);
-
-    return $color;
-
-  }, $colors);
-}
-
-/**
  * Group sequential ranges together
  * Ex: 5, 10, 20
  * @param $numbers

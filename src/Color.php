@@ -12,6 +12,7 @@ class Color
   public array $cmyk;
   public array $rgb;
   public string $hex;
+  public string $grade;
   public string $luminance;
   public array $contrast;
 
