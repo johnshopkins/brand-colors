@@ -290,10 +290,10 @@ class Grades
 
     // manual adjustments
 
-    // get spirit blue (0.39) within grade 30
-    $this->bounds[30][0] = .387;
-    $this->bounds[70][1] = .095;
-    $this->bounds[80][1] = .047;
+    // get spirit blue (0.381) within grade 30
+    $this->bounds[30][0] = .381;
+    $this->bounds[70][1] = .093;
+    $this->bounds[80][1] = .045;
 
     // get tertiary maroon within grade 70
     $this->bounds[70][0] = .05;
@@ -314,6 +314,8 @@ class Grades
     $this->bounds[5][0] = 0.85;
     $this->bounds[5][1] = 0.95;
     $this->bounds[10][1] = 0.84;
+
+    // $this->printTable();
   }
 
   protected function evaluate(int $currentGrade, string $direction = 'up'): void

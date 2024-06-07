@@ -25,12 +25,12 @@ class GradesTest extends TestCase
       5 => [0.85, 0.95],
       10 => [0.75, 0.84],
       20 => [0.64, 0.74],
-      30 => [0.387, 0.624],
+      30 => [0.381, 0.624],
       40 => [0.288, 0.3],
       50 => [0.175, 0.183],
       60 => [0.1, 0.125],
-      70 => [.05, 0.095],
-      80 => [.026, 0.047],
+      70 => [.05, 0.093],
+      80 => [.026, 0.045],
       90 => [.01, 0.025],
       100 => [0, 0],
     ];
@@ -53,19 +53,6 @@ class GradesTest extends TestCase
 
     $testsRun = 0;
     $testsFailed = 0;
-
-    // // USWDS
-    // $grades->bounds = [
-    //   10 => [0.750,0.820],
-    //   20 => [0.500,0.650],
-    //   30 => [0.350,0.450],
-    //   40 => [0.225,0.300],
-    //   50 => [0.175,0.183],
-    //   60 => [0.100,0.125],
-    //   70 => [0.050,0.070],
-    //   80 => [0.020,0.040],
-    //   90 => [0.005,0.015],
-    // ];
 
     foreach ($grades->bounds as $grade => $b) {
 
@@ -131,7 +118,7 @@ class GradesTest extends TestCase
     $this->assertEquals(46, $grades->findGradeOfRGB([0, 155, 119]));
 
     // tertiary tan
-    $this->assertEquals(33, $grades->findGradeOfRGB([203, 160, 82]));
+    $this->assertEquals(30, $grades->findGradeOfRGB([203, 160, 82]));
 
     // secondary blue
     $this->assertEquals(58, $grades->findGradeOfRGB([0, 114, 206]));
