@@ -13,11 +13,11 @@ use JohnsHopkins\Color\Grades;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-// // show shifted colors in a table
-// $mode = 'table';
+// show shifted colors in a table
+$mode = 'table';
 
-// save shifted colors to config/colors.json
-$mode = 'json';
+// // save shifted colors to config/colors.json
+// $mode = 'json';
 
 $saveJSON = false;
 $showTable = true;
