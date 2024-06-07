@@ -15,7 +15,7 @@ $mode = 'table';
 $colors = Colors::get();
 
 $palettes = [
-  'grayscale' => [
+  'Grayscale' => [
     'colors' => [
       50 => (object) [
         'rgb' => [120, 116, 112],
@@ -27,39 +27,39 @@ $palettes = [
       'grayscale' => true,
     ]
   ],
-  'red' => [
+  'Red' => [
     'colors' => [
       30 => $colors[10], // 486 (tertiary coral)
       70 => $colors[12], // 186 (tertiary red)
       80 => $colors[13], // 188 (tertiary maroon)
     ]
   ],
-  'orange' => [
+  'Orange' => [
     'colors' => [
       30 => $colors[2],  // 1375 (secondary-orange)
       40 => $colors[7],  // 1505 (tertiary-orange)
       50 => $colors[11], // 173 (tertiary dark orange)
     ]
   ],
-  'gold' => [
+  'Gold' => [
     'colors' => [
       30 => $colors[5], // 7406 (secondary yellow)
       60 => $colors[8], // 7586 (tertiary brown)
     ]
   ],
-  'warm green' => [
+  'Warm Green' => [
     'colors' => [
       40 => $colors[20], // 7490 (tertiary green)
       70 => $colors[19], // 7734 (tertiary dark green)
     ]
   ],
-  'cool green' => [
+  'Cool Green' => [
     'colors' => [
       30 => $colors[18], // 564 (tertiary seafoam)
       50 => $colors[3],  // 3278 (secondary green)
     ]
   ],
-  'blue' => [
+  'Blue' => [
     'colors' => [
       30 => $colors[1],  // 284 (spirit blue)
       40 => $colors[17], // 279 (tertiary blue)
@@ -67,18 +67,18 @@ $palettes = [
       80 => $colors[0],  // 288 (heritage blue)
     ]
   ],
-  'cool purple' => [
+  'Cool Purple' => [
     'colors' => [
       40 => $colors[16], // 666 (tertiary lavender)
     ]
   ],
-  'warm purple' => [
+  'Warm Purple' => [
     'colors' => [
       50 => $colors[15], // 7655 (tertiary purple)
       80 => $colors[14], // 262 (tertiary dark purple)
     ]
   ],
-  'neutral' => [
+  'Neutral' => [
     'colors' => [
       30 => $colors[6], // 7407 (tertiary tan)
       80 => $colors[9], // 4625 (tertiary dark brown)
