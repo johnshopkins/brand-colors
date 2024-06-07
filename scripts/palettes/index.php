@@ -21,7 +21,7 @@ $palettes = [
         'rgb' => [120, 116, 112],
         'hex' => '787470',
       ],                     // get the colors to be more gray (swatch taken from eric's scale and modified to be within range 50)
-      90 => $colors[21],     // sable
+      90 => $colors[22],     // sable
     ],
     'settings' => [
       'grayscale' => true,
