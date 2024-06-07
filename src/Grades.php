@@ -74,8 +74,6 @@ class Grades
 
         $previousGrade = $grade - 10;
 
-        $this->log('debug', "this color's luminance ($luminance) is between $previousGrade and $grade");
-
         // difference between luminance 1-9 grades in-between grades
         // ex: difference between max luminance of grade 50 and minimum luminamce of grade 60 to get grades 51, 52, 53, etc...
         $betweenGradesDiff = ($prevMax - $bound[0]) / 10;
@@ -86,19 +84,12 @@ class Grades
         // initial lower bound (between grade 1)
         $midGradeMin = $bound[0];
 
-        $this->log('debug', "Initial lower bound: $midGradeMin");
-        $this->log('debug', "Grade diff: $betweenGradesDiff");
-
         for ($i = 1; $i <= 10; $i++) {
 
           // grade $i upperbound
           $midGradeMax = $midGradeMin + $betweenGradesDiff;
 
-          $this->log('debug', ($previousGrade + $i) . " upper bound: $midGradeMax");
-
           if ($luminance <= $midGradeMax) {
-
-            $this->log('debug', "this color's luminance is between " . $grade + ($i - 1) . " and " . $grade + $i);
 
             // figure out if it's closer to the lower or upper luminance bound
             // this will determine if the color is say, 43 or 44
@@ -128,7 +119,15 @@ class Grades
     }
   }
 
-  public function shiftRGBtoGrade(array $rgb, int $grade = null, bool $opposite = false)
+  /**
+   * Shift an RGB value to a grade
+   * @param array $rgb      Array of RGB values ex: [0, 45, 114]
+   * @param int|null $grade Specific grade to shift the RGB color to
+   * @param bool $opposite  By default, the RGB color will be shifted to the
+   *                        closest rade. To shift to the farthest grade, pass TRUE.
+   * @return array          Array of RGB values ex: [0, 45, 114]
+   */
+  public function shiftRGBtoGrade(array $rgb, int $grade = null, bool $opposite = false): array
   {
     $currentGrade = $this->findGradeOfRGB($rgb);
 
@@ -148,7 +147,7 @@ class Grades
 
     $roundTo = $this->bounds[$roundToGrade];
 
-    $colors = $this->getGradeColors($rgb, ...$roundTo);
+    $colors = $this->getGradeColor($rgb, ...$roundTo);
     $direction = $currentGrade > $roundToGrade ? 'down' : 'up';
 
     return [
@@ -158,15 +157,14 @@ class Grades
   }
 
   /**
-   * Create a color palette for a given RGB color value.
-   * Creates three colors per grade (min, mid, max) based on mininum
-   * and maximum luminance of the grade
+   * Creates three color swatches (min, mid, max) for a given RGB color value
+   * based on mininum and maximum luminance of the grade
    * @param array $startingRGB RBG color to base new colors from. Value is an array of RGB values ex: [0, 45, 114]
    * @param float $min         Minimum luminance required by the grade
    * @param float $max         Maximum luminance required by the grade
    * @return array
    */
-  function getGradeColors(array $startingRGB, $min, $max): array
+  function getGradeColor(array $startingRGB, $min, $max): array
   {
     $startingHSL = Convert::rgb_hsl($startingRGB);
     $startingLuminance = round(Calculate::luminance($startingRGB), 3);
@@ -244,9 +242,14 @@ class Grades
     }
   }
 
-  protected function calculate()
+  /**
+   * Determine luminance grades
+   * @return void
+   */
+  protected function calculate(): void
   {
-    // calculate and grades we can initally based on our contrast/grade rules
+    // calculate the grades we can initally figure out based on our contrast/grade rules
+    // and the colors we already know (white and black)
     for ($i = 0; $i < 2; $i++) {
       foreach ($this->bounds as $grade => $bound) {
 
@@ -266,7 +269,9 @@ class Grades
     foreach ($this->bounds as $grade => $bound) {
 
       // we'll manually create grade 5
-      if ($grade === 5) continue;
+      if ($grade === 5) {
+        continue;
+      }
 
       // make sure no maxes are the same as prev grade mins
       if (isset($this->bounds[$grade - 10]) && $bound[1] === $this->bounds[$grade - 10][0]) {
@@ -279,13 +284,6 @@ class Grades
         $this->bounds[$grade][1] = round($this->bounds[$grade - 10][0] - .001, 3);
       }
     }
-
-    // // run it one more time now that no constraints are missing
-    // // nothing changes here
-    // foreach ($this->bounds as $grade => $bound) {
-    //   $this->evaluate($grade, 'up');
-    //   $this->evaluate($grade, 'down');
-    // }
 
     $this->roundBounds();
 
@@ -318,32 +316,23 @@ class Grades
     $this->bounds[10][1] = 0.84;
   }
 
-  protected function evaluate(int $currentGrade, string $direction = 'up')
+  protected function evaluate(int $currentGrade, string $direction = 'up'): void
   {
-    // $this->log('debug', "--------------------");
-    // $this->log('debug', "GRADE: $currentGrade -- $direction");
-    // $this->log('debug', "--------------------");
-
     $startLum = $direction === 'up' ? $this->bounds[$currentGrade][0] : $this->bounds[$currentGrade][1];
 
     if ($startLum === null) return;
 
     foreach ($this->contrasts as $gradeInt => $minContrast) {
 
-      // $this->log('debug', "Contrast test: $minContrast");
-
       $newGrade = $direction === 'up' ? $currentGrade + $gradeInt : $currentGrade - $gradeInt;
 
-      if ($newGrade >= 100 || $newGrade <= 0) continue;
-
-      // $this->log('debug', "New grade: $newGrade");
+      if ($newGrade >= 100 || $newGrade <= 0) {
+        continue;
+      }
 
       $newLum = $direction === 'up' ?
         $this->l2($startLum, $minContrast) :
         $this->l1($startLum, $minContrast);
-
-      // $this->log('debug',  "New lum for grade $newGrade: $newLum");
-
 
       $i = $direction === 'up' ? 1 : 0;
 
@@ -354,24 +343,24 @@ class Grades
       $this->bounds[$newGrade][$i] = $currentLum === null ?
         $newLum :
         $roundMethod($currentLum, $newLum);
-
-      // $this->log('debug', "--------");
     }
-
-    // $this->log('debug', "--------");
   }
 
   /**
-   * No rounding, which can be too much to still meet contrast guidelines.
-   * Instead, just chop off anything after 3 decimal places.
+   * Not technically rounding, which can be too much to still meet contrast
+   * guidelines. Instead, just chop off anything after 3 decimal places.
+   *
+   * Numbers like 0.18333333333333 and 0.10555555555556 are truncated
+   * vs rounded to prevent inaccuracies in the luminance bounds.
+   *
+   * Example: 0.10555555555556 usually rounds to 0.106 (grade 60 max),
+   * but that is too high to meet contrast rules.
+   *
    * @return void
    */
   protected function roundBounds(): void
   {
     // detects numbers like 0.18333333333333 and 0.10555555555556
-    // truncate vs rounding these numbers to prevent inaccuracies
-    // ex: 0.10555555555556 usually rounds to 0.106 (grade 60 max),
-    // but that is too high to meet contrast rules.
     $repeatingDecimal = '/.\d{2}(\d)\1{10,}/';
 
     $this->bounds = array_map(function ($bounds) use ($repeatingDecimal) {
@@ -436,7 +425,7 @@ class Grades
     return (($l1 + 0.05) / $c) - 0.05;
   }
 
-  public function printTable(bool $withDiff = false)
+  public function printTable(bool $withDiff = false): void
   {
     $rows = array_map(function ($bound, $grade) use ($withDiff) {
 
