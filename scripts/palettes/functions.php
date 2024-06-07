@@ -1,108 +1,7 @@
 <?php
 
 use JohnsHopkins\Color\Calculate;
-use JohnsHopkins\Color\Convert;
 use JohnsHopkins\Color\Grades;
-
-function decreaseLightness(array $startingHSL, $min, $max)
-{
-  $foundMinLightness = null;
-  $foundMinColor = null;
-
-  $foundMaxLightness = null;
-  $foundMaxColor = null;
-
-  $hsl = $startingHSL;
-
-  $luminance = round(Calculate::luminance(Convert::hsl_rgb($startingHSL)), 3);
-
-  while ($luminance > $min) {
-
-    // decrease lightness value in HSL
-    // $hsl[2]--;
-    $hsl[2] -= .5;
-
-    // convert new HSL to RGB and get luminance
-    $rgb = Convert::hsl_rgb($hsl);
-    $luminance = round(Calculate::luminance($rgb), 3);
-
-    if ($foundMaxColor === null && $luminance <= $max) {
-      // set max color if it isn't already set
-      $foundMaxColor = $hsl;
-      $foundMaxLightness = $hsl[2];
-    }
-
-    // set min color until white statement finishes
-    $foundMinColor = $hsl;
-    $foundMinLightness = $hsl[2];
-  }
-
-  // get midrange color
-  $hsl[2] = $foundMaxLightness - (($foundMaxLightness - $foundMinLightness) / 2);
-  return $hsl[2];
-
-  // return [
-  //   'min' => $foundMinColor,
-  //   'mid' => $midColor,
-  //   'max' => $foundMaxColor,
-  // ];
-}
-
-function getStarterPalette(array $knownPalette): array
-{
-  $gradeNums = [0, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
-  $starter = array_flip($gradeNums);
-
-  foreach ($knownPalette as $grade => $color) {
-    $starter[$grade] = $color;
-  }
-
-  // add in black and white
-  $starter[0] = [255, 255, 255];
-  $starter[100] = [0, 0, 0];
-
-  return $starter;
-}
-
-/**
- * Group sequential ranges together
- * Ex: 5, 10, 20
- * @param $numbers
- * @return array
- */
-function groupSequential($numbers): array
-{
-  // 5 is an oddball -- convert to 0 initially
-  $key = array_search(5, $numbers);
-  if ($key !== false) {
-    $numbers[$key] = 0;
-  }
-
-  $groups = [];
-
-  $prev = null;
-  for ($i = 0, $g = 0, $max = count($numbers); $i < $max; $i++) {
-
-    $thisNum = $numbers[$i];
-
-    if ($i === 0 || $prev + 10 === $thisNum) {
-      // if first number OR sequential to the previous number (by 10), assign to first group
-      $groups[$g][] = $thisNum === 0 ? 5 : $thisNum;
-    } else {
-      // otherwise, start a new group
-      $g++;
-      $groups[$g][] = $thisNum === 0 ? 5 : $thisNum;
-    }
-
-    $prev = $thisNum;
-
-  }
-
-  return $groups;
-}
-
-
-// Table printing
 
 function getColorCell(array $color, $full = false): string
 {
@@ -139,17 +38,6 @@ function printTable($palettes)
         echo '<td></td>';
         echo '<td></td>';
       }
-
-      // if (is_array($color) && isset($color['mid'])) {
-      //   // echo getColorCell($gradeColors['min']);
-      //   echo getColorCell($color['mid']);
-      //   // echo getColorCell($gradeColors['max']);
-      // } else if (is_object($color)) {
-      //   // this is the brand color
-      //   echo getColorCell($color->rgb, true);
-      // } else {
-      //   echo '<td></td>';
-      // }
       echo "</td></tr>";
     }
 

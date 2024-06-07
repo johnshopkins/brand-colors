@@ -1,11 +1,16 @@
 <?php
 
 use JohnsHopkins\Color\Colors;
-use JohnsHopkins\Color\Convert;
-use JohnsHopkins\Color\Grades;
+use JohnsHopkins\Color\Palette;
 
 require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
 require_once 'functions.php';
+
+// show palettes in a table
+$mode = 'table';
+
+// // save palettes to config/palettes.json
+// $mode = 'json';
 
 $colors = Colors::get();
 
@@ -78,85 +83,15 @@ $palettes = [
   ]
 ];
 
-$palettes = array_map(static function ($knownPalette) {
+$palettes = array_map(fn ($knownPalette) => (new Palette())->create($knownPalette), $palettes);
 
-  $grades = new Grades();
+if ($mode === 'json') {
 
-  $compiledPalette = getStarterPalette($knownPalette['colors']);
+  $json = json_encode($palettes);
+  file_put_contents(dirname(__DIR__, 2) . '/config/palettes.json', $json);
+  exec('npm run format-json');
 
-  // find missing grades
-  $gaps = array_keys(array_filter($compiledPalette, 'is_int'));
-
-  // group missing grades together that will use the same bookend colors
-  $gapGroups = groupSequential($gaps);
-
-  foreach($gapGroups as $group) {
-
-    $startGrade = $group[0] === 5 ? 0 : $group[0] - 10; // starting bookend
-    $endGrade = $group[count($group) - 1] + 10;   // ending bookend
-
-    // convert to HSL
-    $startColor = Convert::rgb_hsl($compiledPalette[$startGrade]);
-    $endColor = Convert::rgb_hsl($compiledPalette[$endGrade]);
-
-    if (!isset($knownPalette['settings']['grayscale']) || $knownPalette['settings']['grayscale'] === false) {
-      // do not factor the in hue and saturation of the starting or ending color (used for non-grayscale palettes)
-      if ($startColor == [0, 0, 100] || $startColor == [0, 0, 0]) {
-        // white or black - use the hue and saturation of the end color
-        $startColor[0] = $endColor[0];
-        $startColor[1] = $endColor[1];
-      } else if ($endColor == [0, 0, 100] || $endColor == [0, 0, 0]) {
-        // white or black - use the hue and saturation of the start color
-        $endColor[0] = $startColor[0];
-        $endColor[1] = $startColor[1];
-      }
-    }
-
-    // get hude and saturation intervals for missing grades
-    // lightness does not factor in here because we calculate lightness based on required luminance ranges
-    $gapsToFill = count($group);
-    $hueInterval = (min(abs($startColor[0] - $endColor[0]), 360 - abs($startColor[0] - $endColor[0]))) / ($gapsToFill + 1);
-    $saturationInteraval = ($startColor[1] - $endColor[1]) / ($gapsToFill + 1);
-
-    // direction we're moving around the color wheel
-    $clockwise = ((($startColor[0] - $endColor[0]) + 360) % 360) < 180;
-
-    foreach ($group as $i => $grade) {
-
-      // adjust hue using the interval
-      $hue = $clockwise ? $startColor[0] - $hueInterval : $startColor[0] + $hueInterval;
-      if ($hue < 0) {
-        // adjust negative angles
-        $hue = 360 + $hue;
-      }
-
-      // adjust saturation using the interval
-      $saturation = $startColor[1] - $saturationInteraval;
-
-      // adjust lightness to fit into this grade
-      $lightness = decreaseLightness([$hue, $saturation, $startColor[2]], ...$grades->bounds[$grade]);
-
-      // put it alltogether
-      $newColor = [$hue, $saturation, $lightness];
-
-      $compiledPalette[$grade] = Convert::hsl_rgb($newColor);
-
-      $startColor = $newColor;
-    }
-  }
-
-  // remove black and white
-  unset($compiledPalette[0], $compiledPalette[100]);
-
-  return $compiledPalette;
-
-}, $palettes);
-
-// $json = json_encode(array_map(function ($palette) {
-//   return array_map(fn ($rgb) => '#' . Convert::rgb_hex($rgb), $palette);
-// }, $palettes), JSON_PRETTY_PRINT);
-//
-// echo $json;
-
-printTable($palettes);
+} else if ($mode === 'table') {
+  printTable($palettes);
+}
 
