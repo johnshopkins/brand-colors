@@ -118,7 +118,7 @@ if ($mode === 'json') {
   $palettes = array_map(function ($colors) {
     return array_map(function ($color) {
       if (is_a($color, \JohnsHopkins\Color\Color::class)) {
-        return ['rgb' => $color->rgb, 'hex' => $color->hex, 'brand' => $color->slug];
+        return ['rgb' => $color->rgb, 'hex' => $color->hex, 'brand' => $color->id];
       }
       return $color;
     }, $colors);
@@ -126,7 +126,6 @@ if ($mode === 'json') {
 
   $json = json_encode($palettes);
   file_put_contents(dirname(__DIR__) . '/config/palettes.json', $json);
-  exec('npm run format-json');
 
 } else if ($mode === 'print') {
 

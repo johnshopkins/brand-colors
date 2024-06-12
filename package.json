@@ -19,7 +19,9 @@
     "build": "vite build --emptyOutDir",
     "test": "jest",
     "coverage": "jest --coverage",
-    "format-json": "node_modules/.bin/prettier config/*.json --write --single-quote --trailing-comma all"
+    "format-json": "node_modules/.bin/prettier config/*.json --write --single-quote --trailing-comma all",
+    "generate-palettes-json": "php ./scripts/generate-palettes.php json && npm run format-json",
+    "generate-palettes-scss": "php ./scripts/generate-palettes.php scss && npm run format-json"
   },
   "repository": {
     "type": "git",
