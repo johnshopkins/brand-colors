@@ -43,7 +43,7 @@ class Palette
         }
       }
 
-      // get hude and saturation intervals for missing grades
+      // get hue and saturation intervals for missing grades
       // lightness does not factor in here because we calculate lightness based on required luminance ranges
       $gapsToFill = count($group);
       $hueInterval = (min(abs($startColor[0] - $endColor[0]), 360 - abs($startColor[0] - $endColor[0]))) / ($gapsToFill + 1);

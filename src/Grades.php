@@ -295,7 +295,7 @@ class Grades
     $this->bounds[70][1] = .093;
     $this->bounds[80][1] = .045;
 
-    // get tertiary maroon within grade 70
+    // get accent maroon within grade 70
     $this->bounds[70][0] = .05;
 
     // adjust grade 60 to be less tight

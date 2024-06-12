@@ -29,77 +29,77 @@ $palettes = [
   ],
   'Red' => [
     'colors' => [
-      30 => $colors[10], // 486 (tertiary coral)
-      70 => $colors[12], // 186 (tertiary red)
-      80 => $colors[13], // 188 (tertiary maroon)
+      30 => $colors[10], // 486 (accent coral)
+      70 => $colors[12], // 186 (accent red)
+      80 => $colors[13], // 188 (accent maroon)
     ]
   ],
   'Orange' => [
     'colors' => [
       30 => $colors[2],  // 1375 (secondary-orange)
-      40 => $colors[7],  // 1505 (tertiary-orange)
-      50 => $colors[11], // 173 (tertiary dark orange)
+      40 => $colors[7],  // 1505 (accent-orange)
+      50 => $colors[11], // 173 (accent dark orange)
     ]
   ],
   'Gold' => [
     'colors' => [
       30 => $colors[5], // 7406 (secondary yellow)
-      60 => $colors[8], // 7586 (tertiary brown)
+      60 => $colors[8], // 7586 (accent brown)
     ]
   ],
   'Warm Green' => [
     'colors' => [
-      40 => $colors[20], // 7490 (tertiary green)
-      70 => $colors[19], // 7734 (tertiary dark green)
+      40 => $colors[20], // 7490 (accent green)
+      70 => $colors[19], // 7734 (accent dark green)
     ]
   ],
   'Cool Green' => [
     'colors' => [
-      30 => $colors[18], // 564 (tertiary seafoam)
+      30 => $colors[18], // 564 (accent seafoam)
       50 => $colors[3],  // 3278 (secondary green)
     ]
   ],
   'Blue' => [
     'colors' => [
       30 => $colors[1],  // 284 (spirit blue)
-      40 => $colors[17], // 279 (tertiary blue)
+      40 => $colors[17], // 279 (accent blue)
       50 =>  $colors[4], // 285 (secondary blue)
       80 => $colors[0],  // 288 (heritage blue)
     ]
   ],
   'Cool Purple' => [
     'colors' => [
-      40 => $colors[16], // 666 (tertiary lavender)
+      40 => $colors[16], // 666 (accent lavender)
     ]
   ],
   'Warm Purple' => [
     'colors' => [
-      50 => $colors[15], // 7655 (tertiary purple)
-      80 => $colors[14], // 262 (tertiary dark purple)
+      50 => $colors[15], // 7655 (accent purple)
+      80 => $colors[14], // 262 (accent dark purple)
     ]
   ],
   'Neutral' => [
     'colors' => [
-      30 => $colors[6], // 7407 (tertiary tan)
-      80 => $colors[9], // 4625 (tertiary dark brown)
+      30 => $colors[6], // 7407 (accent tan)
+      80 => $colors[9], // 4625 (accent dark brown)
     ]
   ],
 
-  // 'green' => [
-  //   'colors' => [
-  //     30 => $colors[18], // 564 (tertiary seafoam)
-  //     40 => $colors[20], // 7490 (tertiary green)
-  //     50 => $colors[3],  // 3278 (secondary green)
-  //     70 => $colors[19], // 7734 (tertiary dark green)
-  //   ]
-  // ],
-  // 'purple' => [
-  //   'colors' => [
-  //     40 => $colors[16], // 666 (tertiary lavender)
-  //     50 => $colors[15], // 7655 (tertiary purple)
-  //     80 => $colors[14], // 262 (tertiary dark purple)
-  //   ]
-  // ],
+  'green' => [
+    'colors' => [
+      30 => $colors[18], // 564 (accent seafoam)
+      40 => $colors[20], // 7490 (accent green)
+      50 => $colors[3],  // 3278 (secondary green)
+      70 => $colors[19], // 7734 (accent dark green)
+    ]
+  ],
+  'purple' => [
+    'colors' => [
+      40 => $colors[16], // 666 (accent lavender)
+      50 => $colors[15], // 7655 (accent purple)
+      80 => $colors[14], // 262 (accent dark purple)
+    ]
+  ],
 ];
 
 $palettes = array_map(fn ($knownPalette) => (new Palette())->create($knownPalette), $palettes);
