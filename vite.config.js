@@ -1,8 +1,6 @@
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 
-console.log(resolve(__dirname, 'assets'))
-
 export default defineConfig({
   root: resolve(__dirname, 'assets'),
   build: {
