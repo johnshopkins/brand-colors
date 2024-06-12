@@ -13,15 +13,21 @@ use JohnsHopkins\Color\Grades;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-// // show shifted colors in a table
-// $mode = 'table';
+$modes = ['print', 'json', 'scss'];
 
-// save shifted colors to config/web-colors.json
-$mode = 'json';
-
-// // save shifted colors in a JSON format usable by:
-// // https://github.com/pmowrer/node-sass-json-importer
-// $mode = 'scss';
+// json: save palettes to config/palettes.json
+// scss: save shifted colors in a JSON format usable by: https://github.com/pmowrer/node-sass-json-importer
+// print: show palettes in an html table
+if (!isset($argv)) {
+  // browser
+  $mode = 'print';
+} else {
+  // cli
+  $mode = $argv[1] ?? null;
+  if (!in_array($mode, $modes)) {
+    die('No valid mode selected.');
+  }
+}
 
 $json = file_get_contents(dirname(__DIR__) . '/config/brand-colors.json');
 $colors = json_decode($json, true);
@@ -102,7 +108,7 @@ if ($mode === 'json') {
   $json = json_encode($colors);
   file_put_contents(dirname(__DIR__) . '/config/web-colors.json', $json);
 
-} else if ($mode === 'table') {
+} else if ($mode === 'print') {
 
   echo "<table style='table-layout: fixed;' cellpadding='10' cellspacing='0' border='1'>";
   echo "<thead><tr><th>Name</th><th>Old</th><th>New</th></tr></thead><tbody>";
