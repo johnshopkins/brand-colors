@@ -13,11 +13,15 @@ use JohnsHopkins\Color\Grades;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-// show shifted colors in a table
-$mode = 'table';
+// // show shifted colors in a table
+// $mode = 'table';
 
-// // save shifted colors to config/colors.json
-// $mode = 'json';
+// save shifted colors to config/web-colors.json
+$mode = 'json';
+
+// // save shifted colors in a JSON format usable by:
+// // https://github.com/pmowrer/node-sass-json-importer
+// $mode = 'scss';
 
 $json = file_get_contents(dirname(__DIR__) . '/config/brand-colors.json');
 $colors = json_decode($json, true);
@@ -96,8 +100,7 @@ $colors = array_map(static function ($color) use ($grades, $mode, $shift) {
 if ($mode === 'json') {
 
   $json = json_encode($colors);
-  file_put_contents(dirname(__DIR__) . '/config/colors.json', $json);
-  exec('npm run format-json');
+  file_put_contents(dirname(__DIR__) . '/config/web-colors.json', $json);
 
 } else if ($mode === 'table') {
 
