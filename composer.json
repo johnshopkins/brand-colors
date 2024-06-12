@@ -18,7 +18,7 @@
     "wp-cli/php-cli-tools": "^0.11.22"
   },
   "scripts": {
-    "test": "./vendor/bin/phpunit ./tests/php --bootstrap vendor/autoload.php --display-deprecations --display-notices --display-warnings",
+    "test": "./vendor/bin/phpunit --bootstrap vendor/autoload.php --display-deprecations --display-notices --display-warnings ./tests/php",
     "coverage": "./vendor/bin/phpunit ./tests/php --bootstrap vendor/autoload.php --coverage-html ~/Desktop/report"
   }
 }

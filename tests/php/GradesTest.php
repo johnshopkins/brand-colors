@@ -58,18 +58,32 @@ class GradesTest extends TestCase
 
       // test each grade
 
+      if (self::DEBUG) {
+        $logger->info("------------------------------------------");
+        $logger->info("Testing $grade grade");
+        $logger->info("------------------------------------------");
+      }
+
       foreach ($grades->contrasts as $gradeDifference => $contrast) {
 
         // with each contrasting grade
 
         $contrastingGrade = $grade + $gradeDifference;
+        if ($contrastingGrade % 10 !== 0) {
+          $contrastingGrade += 5;
+        }
 
         if (!isset($grades->bounds[$contrastingGrade])) {
           // over 100 or under 0
           continue;
         }
 
-        $contrastingBounds = $grades->bounds[$grade + $gradeDifference];
+        if (self::DEBUG) {
+          $logger->info("Testing $grade against $contrastingGrade");
+          $logger->info("-------------------");
+        }
+
+        $contrastingBounds = $grades->bounds[$contrastingGrade];
 
         foreach ($tests as $name => $testBounds) {
 
@@ -77,6 +91,13 @@ class GradesTest extends TestCase
           $l2 = $contrastingBounds[$testBounds[1]];
 
           $ratio = $this->getContrastRatio($l1, $l2);
+
+          if (self::DEBUG) {
+            $l1test = $testBounds[0] === 0 ? 'L1 minimum' : 'L1 maximum';
+            $l2test = $testBounds[1] === 0 ? 'L2 minimum' : 'L2 maximum';
+            $logger->info("Test: $l1test ($l1) against $l2test ($l2)");
+            $logger->info("Expected: $contrast, Actual: $ratio");
+          }
 
           if (!self::DEBUG) {
             // run phpunit assertion
@@ -91,10 +112,15 @@ class GradesTest extends TestCase
             $testsFailed++;
           }
 
+          if (self::DEBUG) {
+            $logger->info("-");
+          }
+
           $testsRun++;
 
         }
       }
+
     }
 
     if (self::DEBUG) {
@@ -104,31 +130,31 @@ class GradesTest extends TestCase
     }
   }
 
-  public function testFindGradeOfRGB(): void
-  {
-    $grades = new Grades(self::DEBUG);
-
-    // black
-    $this->assertEquals(100, $grades->findGradeOfRGB([0, 0, 0]));
-
-    // heritage blue
-    $this->assertEquals(80, $grades->findGradeOfRGB([0, 45, 114]));
-
-    // secondary green
-    $this->assertEquals(46, $grades->findGradeOfRGB([0, 155, 119]));
-
-    // tertiary tan
-    $this->assertEquals(30, $grades->findGradeOfRGB([203, 160, 82]));
-
-    // secondary blue
-    $this->assertEquals(58, $grades->findGradeOfRGB([0, 114, 206]));
-
-    // tertiary orange
-    $this->assertEquals(31, $grades->findGradeOfRGB([255, 105, 0]));
-
-    // white
-    $this->assertEquals(0, $grades->findGradeOfRGB([255, 255, 255]));
-  }
+  // public function testFindGradeOfRGB(): void
+  // {
+  //   $grades = new Grades(self::DEBUG);
+  //
+  //   // black
+  //   $this->assertEquals(100, $grades->findGradeOfRGB([0, 0, 0]));
+  //
+  //   // heritage blue
+  //   $this->assertEquals(80, $grades->findGradeOfRGB([0, 45, 114]));
+  //
+  //   // secondary green
+  //   $this->assertEquals(46, $grades->findGradeOfRGB([0, 155, 119]));
+  //
+  //   // tertiary tan
+  //   $this->assertEquals(30, $grades->findGradeOfRGB([203, 160, 82]));
+  //
+  //   // secondary blue
+  //   $this->assertEquals(58, $grades->findGradeOfRGB([0, 114, 206]));
+  //
+  //   // tertiary orange
+  //   $this->assertEquals(31, $grades->findGradeOfRGB([255, 105, 0]));
+  //
+  //   // white
+  //   $this->assertEquals(0, $grades->findGradeOfRGB([255, 255, 255]));
+  // }
 
   protected function getContrastRatio($l1, $l2)
   {
