@@ -13,10 +13,9 @@ use JohnsHopkins\Color\Grades;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-$modes = ['print', 'json', 'scss'];
+$modes = ['print', 'json'];
 
 // json: save palettes to config/palettes.json
-// scss: save shifted colors in a JSON format usable by: https://github.com/pmowrer/node-sass-json-importer
 // print: show palettes in an html table
 if (!isset($argv)) {
   // browser

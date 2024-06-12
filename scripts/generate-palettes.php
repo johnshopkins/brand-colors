@@ -6,7 +6,7 @@ use JohnsHopkins\Color\Palette;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-$modes = ['print', 'json', 'scss'];
+$modes = ['print', 'json'];
 
 // json: save palettes to config/palettes.json
 // print: show palettes in an html table
@@ -94,21 +94,21 @@ $palettes = [
     ]
   ],
 
-  'green' => [
-    'colors' => [
-      30 => $colors[18], // 564 (accent seafoam)
-      40 => $colors[20], // 7490 (accent green)
-      50 => $colors[3],  // 3278 (secondary green)
-      70 => $colors[19], // 7734 (accent dark green)
-    ]
-  ],
-  'purple' => [
-    'colors' => [
-      40 => $colors[16], // 666 (accent lavender)
-      50 => $colors[15], // 7655 (accent purple)
-      80 => $colors[14], // 262 (accent dark purple)
-    ]
-  ],
+  // 'green' => [
+  //   'colors' => [
+  //     30 => $colors[18], // 564 (accent seafoam)
+  //     40 => $colors[20], // 7490 (accent green)
+  //     50 => $colors[3],  // 3278 (secondary green)
+  //     70 => $colors[19], // 7734 (accent dark green)
+  //   ]
+  // ],
+  // 'purple' => [
+  //   'colors' => [
+  //     40 => $colors[16], // 666 (accent lavender)
+  //     50 => $colors[15], // 7655 (accent purple)
+  //     80 => $colors[14], // 262 (accent dark purple)
+  //   ]
+  // ],
 ];
 
 $palettes = array_map(fn ($knownPalette) => (new Palette())->create($knownPalette), $palettes);
