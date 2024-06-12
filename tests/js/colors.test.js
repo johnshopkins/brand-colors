@@ -1,5 +1,5 @@
 import { colors } from '../../assets/js/main';
-import colorsJson from '../../config/colors.json';
+import colorsJson from '../../config/web-colors.json';
 import Color from "../../assets/js/src/color.js";
 
 // console.log(colorsJson)

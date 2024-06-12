@@ -1,4 +1,4 @@
-import colorsData from '../../../config/colors.json';
+import colorsData from '../../../config/web-colors.json';
 import Color from './color';
 
 /**
