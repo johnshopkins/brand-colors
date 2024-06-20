@@ -69,7 +69,7 @@ $colors = array_map(static function ($color) use ($grades, $mode, $shift) {
 
   if (isset($shift[$id])) {
 
-    if ($mode === 'table') {
+    if ($mode === 'print') {
       $color['shifted'] = true;
       $color['original'] = [
         'rgb' => $color['rgb'],
