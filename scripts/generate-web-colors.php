@@ -43,6 +43,7 @@ $shift = [
   16 => [null, true],
   17 => [null, true],
   18 => [null, true],
+  20 => [],
   21 => [null, true],
 ];
 

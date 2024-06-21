@@ -253,11 +253,11 @@
     "type": "accent",
     "pms": "7734 C",
     "cmyk": [77, 0, 82, 65],
-    "rgb": [40, 97, 64],
-    "hex": "286140",
-    "grade": 66,
-    "luminance": 9.37,
-    "contrast": { "double-black": 2.87, "sable": 2.02, "white": 7.31 }
+    "rgb": [39, 94, 61],
+    "hex": "275e3d",
+    "grade": 70,
+    "luminance": 8.77,
+    "contrast": { "double-black": 2.75, "sable": 1.93, "white": 7.62 }
   },
   {
     "id": 21,
