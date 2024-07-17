@@ -11,7 +11,7 @@ class ConvertTest extends TestCase
   {
     parent::setUp();
 
-    $json = file_get_contents(dirname(__DIR__, 2) . '/config/web-colors.json');
+    $json = file_get_contents(dirname(__DIR__) . '/config/web-colors.json');
     $colors = json_decode($json, true);
     $this->colors = $colors['all'];
   }

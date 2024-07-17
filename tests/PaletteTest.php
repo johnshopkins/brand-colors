@@ -34,7 +34,7 @@ class PaletteTest extends TestCase
     $testsRun = 0;
     $testsFailed = 0;
 
-    $palettes = json_decode(file_get_contents(dirname(__DIR__, 2) . '/config/palettes.json'), true);
+    $palettes = json_decode(file_get_contents(dirname(__DIR__) . '/config/palettes.json'), true);
 
     foreach ($palettes as $name => $colors) {
 
