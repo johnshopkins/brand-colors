@@ -13,7 +13,7 @@ class Colors
     $json = file_get_contents(dirname(__DIR__) . '/config/web-colors.json');
     $colors = json_decode($json, true);
 
-    return array_map(fn ($data) => new Color($data), $colors);
+    return array_map(fn ($data) => new Color($data), $colors['all']);
   }
 
   /**

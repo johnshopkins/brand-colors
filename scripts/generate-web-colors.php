@@ -105,7 +105,20 @@ $colors = array_map(static function ($color) use ($grades, $mode, $shift) {
 
 if ($mode === 'json') {
 
-  $json = json_encode($colors);
+  $organized = [
+    'all' => $colors,
+    'sorted' => [
+      'primary' => [],
+      'secondary' => [],
+      'accent' => [],
+    ]
+  ];
+
+  foreach ($colors as $color) {
+    $organized['sorted'][$color['type']][] = $color;
+  }
+
+  $json = json_encode($organized);
   file_put_contents(dirname(__DIR__) . '/config/web-colors.json', $json);
 
 } else if ($mode === 'print') {

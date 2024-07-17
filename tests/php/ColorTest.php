@@ -11,8 +11,8 @@ class ColorTest extends TestCase
 {
   public function testGet(): void
   {
-    $colors = json_decode(file_get_contents(dirname(__DIR__, 2) . '/config/web-colors.json'), true);
-    $colorObjects = array_map(fn ($data) => new Color($data), $colors);
+    $colors = json_decode(file_get_contents(dirname(__DIR__) . '/config/web-colors.json'), true);
+    $colorObjects = array_map(fn ($data) => new Color($data), $colors['all']);
 
     $this->assertEquals(Colors::get(), $colorObjects);
   }
