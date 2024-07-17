@@ -19,6 +19,10 @@
   },
   "scripts": {
     "test": "./vendor/bin/phpunit --bootstrap vendor/autoload.php --display-deprecations --display-notices --display-warnings ./tests/php",
-    "coverage": "./vendor/bin/phpunit ./tests/php --bootstrap vendor/autoload.php --coverage-html ~/Desktop/report"
+    "coverage": "./vendor/bin/phpunit ./tests/php --bootstrap vendor/autoload.php --coverage-html ~/Desktop/report",
+    "generate-palettes-json": "php ./scripts/generate-palettes.php json && npm run format-json",
+    "generate-web-colors-json": "php ./scripts/generate-web-colors.php json && npm run format-json",
+    "print-grades": "php ./scripts/print-grades.php",
+    "eval-color-grades": "php ./scripts/eval-color-grades.php"
   }
 }
