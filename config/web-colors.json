@@ -337,6 +337,64 @@
       "aa_contrast": "white"
     }
   ],
+  "alert": {
+    "error": {
+      "id": 13,
+      "name": "Accent Red",
+      "slug": "accent-red",
+      "type": "accent",
+      "pms": "187 C",
+      "cmyk": [7, 100, 82, 26],
+      "rgb": [166, 25, 46],
+      "hex": "a6192e",
+      "grade": 70,
+      "luminance": 9,
+      "contrast": { "sable": 1.96, "white": 7.5, "double-black": 2.8 },
+      "aa_contrast": "white"
+    },
+    "warning": {
+      "id": 6,
+      "name": "Secondary Yellow",
+      "slug": "secondary-yellow",
+      "type": "secondary",
+      "pms": "7406 C",
+      "cmyk": [0, 20, 100, 2],
+      "rgb": [241, 196, 0],
+      "hex": "f1c400",
+      "grade": 30,
+      "luminance": 58.18,
+      "contrast": { "sable": 8.86, "white": 1.66, "double-black": 12.64 },
+      "aa_contrast": "sable"
+    },
+    "success": {
+      "id": 4,
+      "name": "Secondary Green",
+      "slug": "secondary-green",
+      "type": "secondary",
+      "pms": "3278 C",
+      "cmyk": [99, 0, 69, 0],
+      "rgb": [0, 135, 103],
+      "hex": "008767",
+      "grade": 50,
+      "luminance": 18.31,
+      "contrast": { "sable": 3.27, "white": 4.51, "double-black": 4.66 },
+      "aa_contrast": "white"
+    },
+    "info": {
+      "id": 5,
+      "name": "Secondary Blue",
+      "slug": "secondary-blue",
+      "type": "secondary",
+      "pms": "285 C",
+      "cmyk": [90, 48, 0, 0],
+      "rgb": [0, 119, 216],
+      "hex": "0077d8",
+      "grade": 50,
+      "luminance": 18.15,
+      "contrast": { "sable": 3.25, "white": 4.54, "double-black": 4.63 },
+      "aa_contrast": "white"
+    }
+  },
   "sorted": {
     "primary": [
       {

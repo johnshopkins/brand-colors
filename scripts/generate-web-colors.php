@@ -122,6 +122,12 @@ if ($mode === 'json') {
 
   $organized = [
     'all' => $colors,
+    'alert' => [
+      'error' => $colors[12],
+      'warning' => $colors[5],
+      'success' => $colors[3],
+      'info' => $colors[4]
+    ],
     'sorted' => [
       'primary' => [],
       'secondary' => [],
