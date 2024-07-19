@@ -15,6 +15,7 @@ class Color
   public string $grade;
   public string $luminance;
   public array $contrast;
+  public string $aa_contrast;
 
   public function __construct($data)
   {

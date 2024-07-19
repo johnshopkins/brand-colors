@@ -80,8 +80,8 @@ class Palette
       }
     }
 
-    // remove black and white
-    unset($compiledPalette[0], $compiledPalette[100]);
+    // // remove black and white
+    // unset($compiledPalette[0], $compiledPalette[100]);
 
     return $compiledPalette;
   }
@@ -139,9 +139,9 @@ class Palette
       $starter[$grade] = $color;
     }
 
-    // add in black and white
-    $starter[0] = (object) ['rgb' => [255, 255, 255]];
-    $starter[100] = (object) ['rgb' => [0, 0, 0]];
+    // // add in black and white
+    // $starter[0] = (object) ['rgb' => [255, 255, 255]];
+    // $starter[100] = (object) ['rgb' => [0, 0, 0]];
 
     return $starter;
   }
