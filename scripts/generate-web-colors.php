@@ -62,6 +62,11 @@ function contrastWithSable(array $color): float
   return Calculate::contrast($color['rgb'], $sable);
 }
 
+function logError($message)
+{
+  echo "\033[31m$message \033[0m\n";
+}
+
 $colors = array_map(static function ($color) use ($grades, $mode, $shift) {
 
   $id = $color['id'];
@@ -94,10 +99,20 @@ $colors = array_map(static function ($color) use ($grades, $mode, $shift) {
   // add luminosity and contrast values
   $color['luminance'] = round(Calculate::luminance($color['rgb']) * 100, 2);
   $color['contrast'] = [
-    'double-black' => Calculate::contrast($color['rgb'], [0, 0, 0]),
     'sable' => contrastWithSable($color),
     'white' => Calculate::contrast([255, 255, 255], $color['rgb']),
   ];
+
+  // highest contrast between white and sable
+  $color['aa_contrast'] = array_keys($color['contrast'], max($color['contrast']))[0];
+
+  if ($color['contrast'][$color['aa_contrast']] < 4.5) {
+    logError("{$color['name']} contrasting AA color does not meet 4.5:1 contrast ratio.");
+    die();
+  }
+
+  // add double black to list of contrasts
+  $color['contrast']['double-black'] = Calculate::contrast($color['rgb'], [0, 0, 0]);
 
   return $color;
 
