@@ -133,8 +133,17 @@ if ($mode === 'json') {
     $organized['sorted'][$color['type']][] = $color;
   }
 
+  // hex to palette family token
+  $tokens = [];
+  foreach ($colors as $color) {
+    $tokens["#{$color['hex']}"] = "--jhu-{$color['slug']}"; 
+  }
+
   $json = json_encode($organized);
   file_put_contents(dirname(__DIR__) . '/config/web-colors.json', $json);
+
+  $json = json_encode($tokens);
+  file_put_contents(dirname(__DIR__) . '/config/hex-to-brand-tokens.json', $json);
 
 } else if ($mode === 'print') {
 

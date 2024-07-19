@@ -115,17 +115,30 @@ $palettes = array_map(fn ($knownPalette) => (new Palette())->create($knownPalett
 
 if ($mode === 'json') {
 
+  // expanded palettes
   $palettes = array_map(function ($colors) {
     return array_map(function ($color) {
       if (is_a($color, \JohnsHopkins\Color\Color::class)) {
         return ['rgb' => $color->rgb, 'hex' => $color->hex, 'brand' => $color->id];
       }
-      return $color;
+      return (array) $color;
     }, $colors);
   }, $palettes);
 
+  // hex to palette family token
+  $tokens = [];
+  foreach ($palettes as $paletteName => $colors) {
+    $paletteName = strtolower(str_replace(' ', '-', $paletteName));
+    foreach ($colors as $grade => $color) {
+      $tokens["#{$color['hex']}"] = "--jhu-$paletteName-$grade"; 
+    }
+  }
+
   $json = json_encode($palettes);
   file_put_contents(dirname(__DIR__) . '/config/palettes.json', $json);
+
+  $json = json_encode($tokens);
+  file_put_contents(dirname(__DIR__) . '/config/hex-to-palette-tokens.json', $json);
 
 } else if ($mode === 'print') {
 
