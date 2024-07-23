@@ -338,7 +338,7 @@
     }
   ],
   "alert": {
-    "error": {
+    "high": {
       "id": 13,
       "name": "Accent Red",
       "slug": "accent-red",
@@ -352,7 +352,7 @@
       "contrast": { "sable": 1.96, "white": 7.5, "double-black": 2.8 },
       "aa_contrast": "white"
     },
-    "warning": {
+    "elevated": {
       "id": 6,
       "name": "Secondary Yellow",
       "slug": "secondary-yellow",
@@ -366,7 +366,7 @@
       "contrast": { "sable": 8.86, "white": 1.66, "double-black": 12.64 },
       "aa_contrast": "sable"
     },
-    "success": {
+    "low": {
       "id": 4,
       "name": "Secondary Green",
       "slug": "secondary-green",
