@@ -140,16 +140,16 @@ class GradesTest extends TestCase
   //   // heritage blue
   //   $this->assertEquals(80, $grades->findGradeOfRGB([0, 45, 114]));
   //
-  //   // secondary green
+  //   // Homewood Green
   //   $this->assertEquals(46, $grades->findGradeOfRGB([0, 155, 119]));
   //
-  //   // accent tan
+  //   // Sand
   //   $this->assertEquals(30, $grades->findGradeOfRGB([203, 160, 82]));
   //
-  //   // secondary blue
+  //   // Medium Blue
   //   $this->assertEquals(58, $grades->findGradeOfRGB([0, 114, 206]));
   //
-  //   // accent orange
+  //   // Red-Orange
   //   $this->assertEquals(31, $grades->findGradeOfRGB([255, 105, 0]));
   //
   //   // white
