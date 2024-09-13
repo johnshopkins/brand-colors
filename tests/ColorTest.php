@@ -19,17 +19,17 @@ class ColorTest extends TestCase
 
   public function testGetByID(): void
   {
-    $this->assertEquals('4625 C', Colors::getByID(10)->pms);
+    $this->assertEquals('4625 C', Colors::getByID(20)->pms);
     $this->assertEquals('288 C', Colors::getByID(1)->pms);
     $this->assertNull(Colors::getByID(25));
   }
 
   public function testGetContrastingColor(): void
   {
-    $this->assertEquals(Colors::getByID(23), Colors::getByID(10)->getContrastingColor());
+    $this->assertEquals(Colors::getByID(23), Colors::getByID(20)->getContrastingColor());
     $this->assertEquals(Colors::getByID(23), Colors::getByID(1)->getContrastingColor());
 
-    $this->assertEquals(Colors::getByID(22), Colors::getByID(6)->getContrastingColor());
-    $this->assertEquals(Colors::getByID(24), Colors::getByID(6)->getContrastingColor(true));
+    $this->assertEquals(Colors::getByID(22), Colors::getByID(12)->getContrastingColor());
+    $this->assertEquals(Colors::getByID(24), Colors::getByID(12)->getContrastingColor(true));
   }
 }

@@ -35,16 +35,16 @@ $grades = new Grades(false);
 
 // colors that need a shift
 $shift = [
-  4 => [],
-  5 => [null, true],
-  8 => [null, true],
-  9 => [null, true],
-  14 => [80], // maroon (so we can have two reds in the palette)
-  16 => [null, true],
-  17 => [null, true],
-  18 => [null, true],
-  20 => [],
-  21 => [null, true],
+  3 => [null, true], // medium blue
+  4 => [null, true], // harbor blue
+  6 => [], // homewood green
+  7 => [], // forest green
+  8 => [null, true], // lime green
+  9 => [null, true], // lavender
+  11 => [null, true], // purple
+  14 => [null, true], // red-orange
+  17 => [80], // maroon (so we can have two reds in the palette)
+  19 => [null, true], // light brown
 ];
 
 function contrastWithSable(array $color): float
@@ -123,14 +123,13 @@ if ($mode === 'json') {
   $organized = [
     'all' => $colors,
     'alert' => [
-      'high' => $colors[12],
-      'elevated' => $colors[5],
-      'low' => $colors[3],
-      'info' => $colors[4],
+      'high' => $colors[15],
+      'elevated' => $colors[11],
+      'low' => $colors[5],
+      'info' => $colors[2],
     ],
     'sorted' => [
       'primary' => [],
-      'secondary' => [],
       'accent' => [],
     ]
   ];
