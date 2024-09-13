@@ -141,7 +141,7 @@ if ($mode === 'json') {
   // hex to palette family token
   $tokens = [];
   foreach ($colors as $color) {
-    $tokens["#{$color['hex']}"] = "--jhu-{$color['slug']}"; 
+    $tokens["#{$color['hex']}"] = "--jhu-brand-{$color['slug']}"; 
   }
 
   $json = json_encode($organized);
