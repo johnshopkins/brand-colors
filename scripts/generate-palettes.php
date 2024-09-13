@@ -26,13 +26,13 @@ $colors = Colors::get();
 $palettes = [
   'Grayscale' => [
     'colors' => [
-      0 => $colors[21],
+      0 => $colors[21], // white
       50 => (object) [
         'rgb' => [120, 116, 112],
         'hex' => '787470',
       ],                     // get the colors to be more gray (swatch taken from eric's scale and modified to be within range 50)
       90 => $colors[22],     // sable
-      100 => $colors[23],
+      100 => $colors[23], // black
     ],
     'settings' => [
       'grayscale' => true,
@@ -41,42 +41,42 @@ $palettes = [
   'Red' => [
     'colors' => [
       0 => $colors[21],
-      30 => $colors[10], // 486 (accent coral)
-      70 => $colors[12], // 186 (accent red)
-      80 => $colors[13], // 188 (accent maroon)
+      30 => $colors[20], // 486 (Salmon)
+      70 => $colors[15], // 186 (Dark Red)
+      80 => $colors[16], // 188 (Maroon)
       100 => $colors[23],
     ]
   ],
   'Orange' => [
     'colors' => [
       0 => $colors[21],
-      30 => $colors[2],  // 1375 (secondary-orange)
-      40 => $colors[7],  // 1505 (accent-orange)
-      50 => $colors[11], // 173 (accent dark orange)
+      30 => $colors[12],  // 1375 (orange)
+      40 => $colors[13],  // 1505 (red-orange)
+      50 => $colors[14], // 173 (Red)
       100 => $colors[23],
     ]
   ],
   'Gold' => [
     'colors' => [
       0 => $colors[21],
-      30 => $colors[5], // 7406 (secondary yellow)
-      60 => $colors[8], // 7586 (accent brown)
+      30 => $colors[11], // 7406 (Gold)
+      60 => $colors[18], // 7586 (Light Brown)
       100 => $colors[23],
     ]
   ],
   'Warm Green' => [
     'colors' => [
       0 => $colors[21],
-      40 => $colors[20], // 7490 (accent green)
-      70 => $colors[19], // 7734 (accent dark green)
+      40 => $colors[7], // 7490 (Lime Green)
+      70 => $colors[6], // 7734 (Forest Green)
       100 => $colors[23],
     ]
   ],
   'Cool Green' => [
     'colors' => [
       0 => $colors[21],
-      30 => $colors[18], // 564 (accent seafoam)
-      50 => $colors[3],  // 3278 (secondary green)
+      30 => $colors[4], // 564 (Mint Green)
+      50 => $colors[5],  // 3278 (Homewood Green)
       100 => $colors[23],
     ]
   ],
@@ -84,8 +84,8 @@ $palettes = [
     'colors' => [
       0 => $colors[21],
       30 => $colors[1],  // 284 (spirit blue)
-      40 => $colors[17], // 279 (accent blue)
-      50 =>  $colors[4], // 285 (secondary blue)
+      40 => $colors[3], // 279 (Harbor Blue)
+      50 =>  $colors[2], // 285 (Medium Blue)
       80 => $colors[0],  // 288 (heritage blue)
       100 => $colors[23],
     ]
@@ -93,40 +93,40 @@ $palettes = [
   'Cool Purple' => [
     'colors' => [
       0 => $colors[21],
-      40 => $colors[16], // 666 (accent lavender)
+      40 => $colors[8], // 666 (Lavender)
       100 => $colors[23],
     ]
   ],
   'Warm Purple' => [
     'colors' => [
       0 => $colors[21],
-      50 => $colors[15], // 7655 (accent purple)
-      80 => $colors[14], // 262 (accent dark purple)
+      50 => $colors[10], // 7655 (Purple)
+      80 => $colors[9], // 262 (Plum)
       100 => $colors[23],
     ]
   ],
   'Neutral' => [
     'colors' => [
       0 => $colors[21],
-      30 => $colors[6], // 7407 (accent tan)
-      80 => $colors[9], // 4625 (accent dark brown)
+      30 => $colors[17], // 7407 (Sand)
+      80 => $colors[21], // 4625 (Dark Brown)
       100 => $colors[23],
     ]
   ],
 
   // 'green' => [
   //   'colors' => [
-  //     30 => $colors[18], // 564 (accent seafoam)
-  //     40 => $colors[20], // 7490 (accent green)
-  //     50 => $colors[3],  // 3278 (secondary green)
-  //     70 => $colors[19], // 7734 (accent dark green)
+  //     30 => $colors[4], // 564 (Mint Green)
+  //     40 => $colors[7], // 7490 (Lime Green)
+  //     50 => $colors[5],  // 3278 (Homewood Green)
+  //     70 => $colors[6], // 7734 (Forest Green)
   //   ]
   // ],
   // 'purple' => [
   //   'colors' => [
-  //     40 => $colors[16], // 666 (accent lavender)
-  //     50 => $colors[15], // 7655 (accent purple)
-  //     80 => $colors[14], // 262 (accent dark purple)
+  //     40 => $colors[8], // 666 (Lavender)
+  //     50 => $colors[10], // 7655 (Purple)
+  //     80 => $colors[9], // 262 (Plum)
   //   ]
   // ],
 ];
