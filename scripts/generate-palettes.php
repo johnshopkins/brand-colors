@@ -90,18 +90,18 @@ $palettes = [
       100 => $colors[23],
     ]
   ],
-  'Cool Purple' => [
-    'colors' => [
-      0 => $colors[21],
-      40 => $colors[8], // 666 (Lavender)
-      100 => $colors[23],
-    ]
-  ],
   'Warm Purple' => [
     'colors' => [
       0 => $colors[21],
       50 => $colors[10], // 7655 (Purple)
       80 => $colors[9], // 262 (Plum)
+      100 => $colors[23],
+    ]
+  ],
+  'Cool Purple' => [
+    'colors' => [
+      0 => $colors[21],
+      40 => $colors[8], // 666 (Lavender)
       100 => $colors[23],
     ]
   ],
