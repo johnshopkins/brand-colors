@@ -248,7 +248,7 @@ class Grades
    */
   protected function calculate(): void
   {
-    // calculate the grades we can initally figure out based on our contrast/grade rules
+    // calculate the grades we can initially figure out based on our contrast/grade rules
     // and the colors we already know (white and black)
     for ($i = 0; $i < 2; $i++) {
       foreach ($this->bounds as $grade => $bound) {
@@ -263,7 +263,7 @@ class Grades
 
     $this->roundBounds();
 
-    // add in missing contraints based on other bounds:
+    // add in missing constraints based on other bounds:
     // * if missing the min in one row, make it the (0.001 more) max of the row BELOW
     // * if missing the max in one row, make it the (0.001 less) min of the row ABOVE
     foreach ($this->bounds as $grade => $bound) {
